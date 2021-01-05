@@ -54,7 +54,10 @@ body{
                         $avatar = $_POST['avatar'];
 
                         $user->register($login, $password, $password_check, $avatar);
-                    }?>
+                    }
+                        
+                        ?>
+                  
                 </div>
             </div>
             <div class="col-5 ">

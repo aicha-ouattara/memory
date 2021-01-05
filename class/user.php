@@ -52,9 +52,14 @@ class user
         }
 
         if (empty($errors)) {
-            $insertDatabase = $db->prepare("INSERT INTO utilisateurs(login, password,avatar) VALUES(?, ?, ?)");
-            $insertDatabase->execute(array($login, $passwordHash, $avatar));
-            
+            $insertDatabase = $db->prepare("INSERT INTO utilisateurs(login, password, avatar) VALUES(?, ?, ?)");
+            $insertDatabase->execute(array($login, $passwordHash, $avatar));?>
+        
+            <div class="alert alert-success" role="alert">Bravo vous êtes officiellement un petit monstre !</div>
+            <a href="connexion.php">Connexion à ton compte</a>
+            <img src="https://media.giphy.com/media/27bK4xfPEEOvAheEgX/giphy.gif" alt="gifmonster" class="gifmonster">  
+       <?php  
+             
         } else {
             $message = new messages($errors);
             echo $message->renderMessage();
@@ -162,20 +167,24 @@ class user
 
         if (empty($errors)) {
             $update = $db->prepare("UPDATE utilisateurs SET login = ? , password = ?, avatar = ? WHERE id = ?");
-            $update->execute(array($login, $passwordHash, $avatar, $this->id));?>
-            <div class="alert alert-success" role="alert">Bravo vous êtes officiellement un petit monstre !</div>
-            <img src="https://media.giphy.com/media/27bK4xfPEEOvAheEgX/giphy.gif" alt="gifmonster" class="gifmonster"> 
-        
-       <?php } 
+            $update->execute(array($login, $passwordHash, $avatar, $this->id));
+        }
          else {
             $message = new messages($errors);
             echo $message->renderMessage();
         }
     }
 
+    public function getLogin()
+    {
+        return $this->login;
+    }
 
-
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
 }
+
 ?>

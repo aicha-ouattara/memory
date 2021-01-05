@@ -7,6 +7,16 @@ if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
 }
 
+$id = $user->getId();
+$db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
+
+$data = $db->prepare("SELECT avatar FROM utilisateurs WHERE id = $id");
+$data->execute(array($id));
+$result = $data->fetch(PDO::FETCH_ASSOC);
+
+foreach ($result as $value) {
+    $avatar = "<img class=\"avatar\" src=\"img/$value.png\">";
+}
 
 ?>
 
@@ -29,12 +39,16 @@ if (isset($_SESSION['user'])) {
     <main>
 
 
-        <div class="row align-items-center">
+        <div class="row justify-content-center">
 
             <div class="col-3">
 
+                <h3> BONJOUR <?php echo $user->getLogin(); ?> ! </h3><br><br>
 
                 <?php
+
+                echo $avatar;
+
                 if (isset($_POST['submit'])) {
                     $login = htmlspecialchars($_POST['login']);
                     $password = htmlspecialchars($_POST['password']);
@@ -42,10 +56,10 @@ if (isset($_SESSION['user'])) {
                     $avatar =  $_POST['avatar'];
 
                     $user->update_profile($login, $password, $password_check, $avatar);
-                }
+                } ?>
 
-                ?>
             </div>
+
             <div class="col-5 offset-1">
                 <div class="container">
                     <h1>Modifier les données de votre profil</h1>
