@@ -1,0 +1,15 @@
+.dos{
+	height: 20vh;
+	width : 30vh;
+	background-image: url('dos_carte.jpg');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.face{
+	height: 20vh;
+	width : 30vh;
+	background-image: url('carte.jpg');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
