@@ -152,12 +152,27 @@
 					$this->grid[$positions[0]]->flip();
 					$this->grid[$positions[1]]->flip();
 				}
+				// Et on retourne la nouvelle carte
+				$this->grid[$card_number]->flip();
 			}
-
-			// On retourne la nouvelle carte
-			$this->grid[$card_number]->flip();
-			
-
+			// Si une seule carte active
+			elseif (count($positions) == 1) {
+				// On retourne la nouvelle carte
+				$this->grid[$card_number]->flip();
+				// On ajoute la carte retournée à la liste des positions
+				$positions[] = $card_number;
+				// On vérifie leur correspondance
+				$correspond = $this->checkFlippedCards($positions);
+				// Si elles correspondent les désactiver
+				if ($correspond) {
+					$this->grid[$positions[0]]->validate();
+					$this->grid[$positions[1]]->validate();
+				}
+			}
+			// Sinon on retourne juste la nouvelle carte
+			else {
+				$this->grid[$card_number]->flip();
+			}
 		}
 	}
 
