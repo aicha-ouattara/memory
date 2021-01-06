@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Boogaloo&display=swap');
+nav {
+    background-color: none;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 2em;
+}
+
+body {
+    background-image: url(https://media.giphy.com/media/BHNfhgU63qrks/giphy.gif);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+nav a {
+    color: #ffe817;
+}
+
+* {
+    cursor: url("https://1.bp.blogspot.com/-NmbnDADABUE/XSfhUk_X2yI/AAAAAAAAFFw/5Tp7zt_8erg2AJ-aQ1VhYdH_l4nTReY7wCLcBGAs/s1600/cursor.png"), default;
+}
+
+nav a:hover {
+    color: #f5384a;
+}
+
+.home {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Luckiest Guy', cursive;
+    margin-top: 4%;
+}
+
+h1 {
+    font-size: 5.5em;
+    color: #ffe817de;
+}
+
+.monster {
+    animation: jump 4s linear 0s infinite normal;
+}
+
+@keyframes jump {
+    0% {
+        transform: translateY(-15px);
+    }
+    20% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-15px);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+    80% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-15px);
+    }
+}
+
+.arrow {
+    width: 5%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.6;
+}
+
+.arrow:hover {
+    width: 7%;
+    transition: 0.8s
+}
+
+#presentation {
+    margin-top: 5%;
+    background-image: url(img/bull.png);
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: 100%;
+    height: 90vh;
+    width: 40%;
+}
+
+h2 {
+    font-family: 'Boogaloo', cursive;
+    color: #c4656f;
+}
+
+.dialogue {
+    width: 70%;
+    text-align: center;
+    margin-left: 12%;
+    font-family: 'Boogaloo', cursive;
+    font-size: 20px;
+    color: #126075;
+}
+
+.container_home {
+    margin-left: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.container_home img {
+    width: 160%;
+    animation: jump 4s linear 0s infinite normal;
+}
