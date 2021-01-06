@@ -1,0 +1,196 @@
+@import url(https://weloveiconfonts.com/api/?family=maki);
+
+html,
+main,
+body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+[class*="maki-"]:before{
+    font-family: 'maki', sans-serif;
+}
+
+*:after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    content: '';
+    z-index: -1;
+    width: 0;
+    height: 0;
+}
+
+[class*="maki-"] {
+    position: absolute;
+    margin: 0;
+    color: #fff;
+    font-size: 2em;
+}
+
+.wrapper {
+    height: 140%;
+    width: 120%;
+    transform: rotate(-3deg) translate(-10%, -15%);
+}
+
+.night {
+    position: absolute;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    animation: night 45s infinite forwards;
+}
+
+@keyframes night {
+    0%, 30%, 100% {background:rgba(0, 0, 0, 0);}
+    /*55% {background: rgba(226, 7, 7, 0.6);}*/
+}
+
+.sky {
+    position: relative;
+    z-index: 0;
+    background: url(https://www.toptal.com/designers/subtlepatterns/patterns/bedge_grunge.png);
+    height: 50%;
+    width: 100%;
+    animation: rollin-bg 25s linear infinite forwards;
+}
+
+.ground {
+    position: absolute;
+    z-index: 1;
+    background: url("https://media.giphy.com/media/47KTjNoPHubDmV2eJM/giphy.gif");
+    height: 50%;
+    width: 100%;
+    animation: rollin-bg 7s linear infinite forwards;
+}
+
+@keyframes rollin-bg {
+    0% {background-position: 100%;}
+    100% {background-position: 0;}
+}
+
+.sun {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 10%;
+    width: 2em;
+    height: 2em;
+    font-size: 4em;
+    line-height: 1;
+    animation: circle 45s linear infinite;
+    transform-origin: 50% 3.85em;
+}
+
+.sun [class*="maki-"] {
+    color: rgba(240, 180, 0, .2);
+    text-shadow: 0 0 .35em rgba(240, 240, 0, .7);
+}
+
+.sun > div {
+    animation: inner-circle 45s linear infinite;
+}
+
+@keyframes circle {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes inner-circle {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
+.maki-bicycle {
+    left: 50%;
+    z-index: 4;
+    margin: -.85em 0 0 -.5em;
+    color: rgba(30, 30, 140, .95);
+}
+
+.maki-tree-1[data-child="1"] {
+    margin: -1em 0 0 5%;
+    z-index: 6;
+    animation: rollin 5s linear infinite;
+    font-size: 2.4em;
+    color: rgba(0, 110, 0, 1);
+}
+
+.maki-tree-1[data-child="2"] {
+    margin: -1em 0 0 85%;
+    z-index: 2;
+    animation: rollin 12s linear infinite;
+    font-size: 1.6em;
+    color: rgba(0, 110, 0, .5);
+}
+
+.maki-tree-1[data-child="3"] {
+    margin: -1em 0 0 25%;
+    z-index: 2;
+    animation: rollin 17s linear infinite;
+    font-size: 1.2em;
+    color: rgba(0, 110, 0, .3);
+}
+
+/*.maki-giraffe {*/
+/*    margin: .25em 0 0 5%;*/
+/*    z-index: 6;*/
+/*    animation: rollin 12s linear infinite reverse;*/
+/*    font-size: 10em;*/
+/*    color: rgba(255, 255, 10, .9);*/
+/*}*/
+
+/*.maki-giraffe:after {*/
+/*    right: -3em;*/
+/*    !*content: '\e82a \e82a \e82a \e82a \e82a';*!*/
+/*    font: .2em 'Maki', sans-serif;*/
+/*    letter-spacing: .2em;*/
+/*    width: 3em;*/
+/*    color: rgba(0, 0, 0, .6);*/
+/*    box-shadow:*/
+/*            0 .45em 0 .75em rgba(255, 255, 255, .4),*/
+/*            1em .35em 0 .75em rgba(255, 255, 255, .4),*/
+/*            2.25em .25em 0 1.05em rgba(255, 255, 255, .4)*/
+/*;*/
+/*    border-radius: 50%;*/
+/*    transform: translate(2.3em, .55em) rotateY(-180deg);*/
+/*}*/
+
+.maki-grocery-store {
+    margin: -.35em 0 0 5%;
+    z-index: 5;
+    animation: rollin 22s linear infinite;
+    font-size: 4em;
+    color: rgba(220, 0, 10, .7);
+}
+
+.maki-commerical-building[data-child="1"] {
+    margin: -1em 0 0 5%;
+    z-index: 3;
+    animation: rollin 6s linear infinite;
+    font-size: 7em;
+    color: rgba(120, 0, 120, .8);
+}
+
+.maki-commerical-building[data-child="2"]  {
+    margin: -1em 0 0 5%;
+    z-index: 2;
+    animation: rollin 14s linear infinite;
+    font-size: 4em;
+    color: rgba(0, 120, 120, .4);
+}
+
+.maki-heliport {
+    margin: -3.5em 0 0 2em;
+    z-index: 1;
+    color: rgba(30, 30, 30, .45);
+    font-size: 1.25em;
+    animation: rollin 26s linear infinite reverse 2s;
+}
+
+@keyframes rollin {
+    0% {margin-left:105%}
+    100% {margin-left:-15%;}
+}
