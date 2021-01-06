@@ -6,6 +6,7 @@ body {
     height: 100%;
     width: 100%;
     overflow: hidden;
+    background: #333;
 }
 
 [class*="maki-"]:before{
@@ -45,7 +46,7 @@ body {
 
 @keyframes night {
     0%, 30%, 100% {background:rgba(0, 0, 0, 0);}
-    /*55% {background: rgba(226, 7, 7, 0.6);}*/
+    55% {background: rgba(0, 0, 0, .6);}
 }
 
 .sky {
@@ -60,7 +61,7 @@ body {
 .ground {
     position: absolute;
     z-index: 1;
-    background: url("https://media.giphy.com/media/47KTjNoPHubDmV2eJM/giphy.gif");
+    background: url(https://www.toptal.com/designers/subtlepatterns/patterns/blackorchid.png);
     height: 50%;
     width: 100%;
     animation: rollin-bg 7s linear infinite forwards;
@@ -134,29 +135,29 @@ body {
     color: rgba(0, 110, 0, .3);
 }
 
-/*.maki-giraffe {*/
-/*    margin: .25em 0 0 5%;*/
-/*    z-index: 6;*/
-/*    animation: rollin 12s linear infinite reverse;*/
-/*    font-size: 10em;*/
-/*    color: rgba(255, 255, 10, .9);*/
-/*}*/
+.maki-giraffe {
+    margin: .25em 0 0 5%;
+    z-index: 6;
+    animation: rollin 12s linear infinite reverse;
+    font-size: 10em;
+    color: rgba(255, 255, 10, .9);
+}
 
-/*.maki-giraffe:after {*/
-/*    right: -3em;*/
-/*    !*content: '\e82a \e82a \e82a \e82a \e82a';*!*/
-/*    font: .2em 'Maki', sans-serif;*/
-/*    letter-spacing: .2em;*/
-/*    width: 3em;*/
-/*    color: rgba(0, 0, 0, .6);*/
-/*    box-shadow:*/
-/*            0 .45em 0 .75em rgba(255, 255, 255, .4),*/
-/*            1em .35em 0 .75em rgba(255, 255, 255, .4),*/
-/*            2.25em .25em 0 1.05em rgba(255, 255, 255, .4)*/
-/*;*/
-/*    border-radius: 50%;*/
-/*    transform: translate(2.3em, .55em) rotateY(-180deg);*/
-/*}*/
+.maki-giraffe:after {
+    right: -3em;
+    content: '\e82a \e82a \e82a \e82a \e82a';
+    font: .2em 'Maki', sans-serif;
+    letter-spacing: .2em;
+    width: 3em;
+    color: rgba(0, 0, 0, .6);
+    box-shadow:
+            0 .45em 0 .75em rgba(255, 255, 255, .4),
+            1em .35em 0 .75em rgba(255, 255, 255, .4),
+            2.25em .25em 0 1.05em rgba(255, 255, 255, .4)
+;
+    border-radius: 50%;
+    transform: translate(2.3em, .55em) rotateY(-180deg);
+}
 
 .maki-grocery-store {
     margin: -.35em 0 0 5%;
