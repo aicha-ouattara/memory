@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Boogaloo&display=swap');
+nav {
+    background-color: none;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 2em;
+}
+
+body {
+    background-image: url(https://media.giphy.com/media/BHNfhgU63qrks/giphy.gif);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+nav a {
+    color: #ffe817;
+}
+
+* {
+    cursor: url("https://1.bp.blogspot.com/-NmbnDADABUE/XSfhUk_X2yI/AAAAAAAAFFw/5Tp7zt_8erg2AJ-aQ1VhYdH_l4nTReY7wCLcBGAs/s1600/cursor.png"), default;
+}
+
+nav a:hover {
+    color: #f5384a;
+}
+
