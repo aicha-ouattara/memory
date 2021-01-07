@@ -27,7 +27,7 @@ class Wof
     public function users_progress($grid)  //$grid ou $id ?
     {
         $bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-        $req= $bdd->prepare("SELECT * FROM score WHERE id_utilisateur = ? ORDER BY score.id DESC LIMIT 5");
+        $req= $bdd->prepare("SELECT * FROM grille WHERE id_utilisateur = ? ORDER BY score.id DESC LIMIT 5");
         $req->execute([$grid]);
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
         $bdd = NULL;
