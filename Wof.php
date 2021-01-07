@@ -1,82 +1,85 @@
 <?php
+define('MYSQL_SERVEUR', 'localhost');
+define('MYSQL_UTILISATEUR', 'root');
+define('MYSQL_MOTDEPASSE', '');
+define('MYSQL_BASE', 'memory');
+
 
 class Wof
 {
     private $id;
     private $time;
-    private $grille;
+    private $grid;
     private $datetime;
 
-    public function __construct()
+    //Recuparation de toutes les infos du joueur
+    public function users_profil_details()
     {
-        $this->id;
-        $this->time;
-        $this->grille;
-        $this->datetime;
-    }
-
-    public function profil_utilisateur()
-    {
-        $bdd = new PDO("mysql:host=localhost;dbname=memory", "root", "");
-        $req = $bdd->prepare("SELECT games.time, games.grille, games.datetime, utilisateurs.login FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = utilisateurs.id ");
+        $bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
+        $req = $bdd->prepare("SELECT games.time, games.grille, games.datetime, utilisateurs.login, utilisateurs.avatar FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = utilisateurs.id ");
         $req->execute();
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
         $bdd = NULL;
         return $resultat;
     }
 
-    public function dix_meilleures_parties()
+    //Recuparation des infos de la progression du joueur par grid:niveau
+    public function users_progress($grid)  //$grid ou $id ?
     {
-        $bdd = new PDO("mysql:host=localhost;dbname=memory", "root", "");
-        $req = $bdd->prepare("SELECT * FROM games ORDER BY time ASC LIMIT 10 ;");
-        $req->execute();
-        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
-        $bdd = NULL;
-        return $resultat;
-    }
-
-  public function trois_dernieres_parties()
-    {
-        $bdd = new PDO("mysql:host=localhost;dbname=memory", "root", "");
-        $req = $bdd->prepare("SELECT games.time, utilisateurs.login FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = utilisateurs.id LIMIT 3");
-        $req->execute();
+        $bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
+        $req= $bdd->prepare("SELECT * FROM score WHERE id_utilisateur = ? ORDER BY score.id DESC LIMIT 5");
+        $req->execute([$grid]);
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
         $bdd = NULL;
         return $resultat;
     }
 
 
+    //dix meilleurs parties par grille:niveau classé par temps
+    public function top_10($grid)
+    {
+        $bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
+        $req = $bdd->prepare("SELECT games.grille, games.datetime, utilisateurs.login, utilisateurs.avatar, DATE_FORMAT(time, '%i:%s') AS time FROM games inner join utilisateurs on games.id_utilisateur =  utilisateurs.id
+        WHERE grille = ? ORDER BY games.time ASC LIMIT 10 ");
+        $req->execute([$grid]);
+        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+        $bdd = NULL;
+        return $resultat;
+    }
 
-    /* public function Get_id($id)
-     {
-             $bdd =new PDO("mysql:host=localhost;dbname=reservationsalles","root","");
-             $req =  $bdd->prepare("SELECT login, titre, description, debut, fin FROM reservations INNER JOIN utilisateurs ON reservations.id_utilisateur = utilisateurs.id WHERE reservations.id = $id");
-             $req->execute(array($id));
-             $users=$req->fetch(PDO::FETCH_ASSOC);
-             if($users)
-             {
-                 $this->login = $users["login"];
-                 $this->titre = $users["titre"];
-                 $this->description = $users["debut"];
-                 $this->debut  = $users["debut"];
-                 $this->fin = $users["fin"];
-                 return $users;
-             }
-     }*/
+    //Les 3 dernieres parties qui ont été jouer
+    public function three_last_games()
+    {
+        $bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
+        $req = $bdd->prepare("SELECT games.time, utilisateurs.login, utilisateurs.avatar FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = utilisateurs.id LIMIT 3");
+        $req->execute();
+        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+        $bdd = NULL;
+        return $resultat;
+    }
+
+
 
 }
 
+
+
+
 $wof = new Wof();
 echo "<pre>";
-var_dump($wof->profil_utilisateur());
+var_dump($wof->users_profil_details());
 echo "</pre>";
 
 echo "<pre>";
-var_dump($wof->dix_meilleures_parties());
+var_dump($wof->users_progress(6));
 echo "</pre>";
 
 echo "<pre>";
-var_dump($wof->trois_dernieres_parties());
+var_dump($wof->top_10(6));
+echo "</pre>";
+
+echo "<pre>";
+var_dump($wof->three_last_games());
 echo "</pre>";
 
 ?>
