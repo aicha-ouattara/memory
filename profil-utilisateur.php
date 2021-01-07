@@ -30,7 +30,10 @@
     <article class="best-games">
         <p>Tes Meilleures parties</p>
     </article>
-    <h3 class="return">Retour au jeu</h3>
+    <article class="detail-button">
+      <img class="retour-button" src="images/retour.png">
+        <p>Retour</p>
+    </article>
     <article class="last-games">
         <p>Tes Dernières parties</p>
     </article>
@@ -39,6 +42,6 @@
     </aside>
 </main>
 <footer></footer>
-</body><
+</body>
 </html>
 

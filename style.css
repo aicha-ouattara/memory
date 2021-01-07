@@ -33,7 +33,7 @@ nav a:hover {
     justify-content: space-around;
     font-family: 'Luckiest Guy', cursive;
     font-size: 50px;
-    color: #ffe817;
+    color: white;
 }
 .best-games
 {
@@ -73,9 +73,15 @@ nav a:hover {
     font-family: 'Luckiest Guy', cursive;
     margin: 30px;
 }
-.return
+.detail-button
 {
     font-family: 'Luckiest Guy', cursive;
     color: #ffe817;
     text-align: center;
+}
+.retour-button
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
