@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Boogaloo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+/* ELEMENTS COMMUN A TOUTES LES PAGES */
+
+
+/* NAV & BODY */
+
+nav {
+    background-color: none;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 2em;
+}
+
+body {
+    background-image: url(https://media.giphy.com/media/BHNfhgU63qrks/giphy.gif);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+nav a {
+    color: #ffe817;
+}
+
+* {
+    cursor: url("https://1.bp.blogspot.com/-NmbnDADABUE/XSfhUk_X2yI/AAAAAAAAFFw/5Tp7zt_8erg2AJ-aQ1VhYdH_l4nTReY7wCLcBGAs/s1600/cursor.png"), default;
+}
+
+nav a:hover {
+    color: #f5384a;
+}
+
+
+/* FOOTER */
+
+.container-logo {
+    background-color: rgba(0, 0, 0, 0.219);
+    padding-top: 2%;
+    margin-top: 5%;
+}
+
+.container-logo i {
+    width: 5%;
+    color: rgba(179, 179, 179, 0.623);
+}
+
+.container-logo i:hover {
+    color: rgb(240, 134, 35);
+}
+
+.copi {
+    background-color: rgba(0, 0, 0, 0.219);
+    padding-bottom: 0.5%;
+    padding-top: 1%;
+}
+
+.copi p {
+    color: rgba(179, 179, 179, 0.623);
+    font-size: 1em;
+    font-family: 'Boogaloo', cursive;
+}
+
+
+/* PAGE INDEX ECRAN ACCUEIL */
+
+.home {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Luckiest Guy', cursive;
+    margin-top: 4%;
+}
+
+.home h1 {
+    font-size: 5.5em;
+    color: #ffe817de;
+}
+
+.monster {
+    animation: jump 4s linear 0s infinite normal;
+}
+
+@keyframes jump {
+    0% {
+        transform: translateY(-15px);
+    }
+    20% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-15px);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+    80% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-15px);
+    }
+}
+
+.arrow {
+    width: 5%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.6;
+}
+
+.arrow:hover {
+    width: 7%;
+    transition: 0.8s
+}
+
+
+/* PAGE INDEX - PRESENTATION JEU */
+
+.presentation {
+    margin-top: 5%;
+    background-image: url(../img/bull.png);
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: 100%;
+    height: 90vh;
+    width: 40%;
+}
+
+.presentation h2 {
+    font-family: 'Boogaloo', cursive;
+    color: #c4656f;
+}
+
+.dialogue {
+    width: 70%;
+    text-align: center;
+    margin-left: 12%;
+    font-family: 'Boogaloo', cursive;
+    font-size: 20px;
+    color: #126075;
+}
+
+#container_home {
+    margin-left: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.poulpevert {
+    width: 160%;
+    animation: jump 4s linear 0s infinite normal;
+}
+
+.arrow2 {
+    width: 80%;
+    margin-left: 200%;
+    opacity: 0.6;
+}
+
+.arrow2:hover {
+    width: 90%;
+    transition: 0.8s
+}
+
+
+/* PAGE INDEX - WALK OF FAME */
+
+#classement {
+    margin-top: 5%;
+}
+
+.container_title h2 {
+    font-size: 5.5em;
+    color: #ffe817de;
+    font-family: 'Luckiest Guy', cursive;
+}
+
+.container_title h3 {
+    font-size: 2em;
+    color: #ffe817de;
+    font-family: 'Luckiest Guy', cursive;
+}
+
+.title_class {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.bluemonster {
+    animation: jump 4s linear 0s infinite normal;
+}
+
+.imgclass {
+    margin-top: 2%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+
+.title_play {
+    font-size: 2em;
+    color: #ffe817de;
+    font-family: 'Luckiest Guy', cursive;
+}
+
+.play a {
+    text-decoration: none;
+}
+
+
+/* COMMUN PAGE INSCRIPTION ET CONNEXION */
+
+ul {
+    background-color: rgba(136, 20, 0, 0.767);
+    color: white;
+    border-radius: 10px;
+    padding-top: 3%;
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-control {
+    background-color: rgba(0, 0, 0, 0.514);
+    border: transparent;
+    font-family: 'Roboto', sans-serif;
+    width: 70%;
+    color: white;
+}
+
+label {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container h4 {
+    color: #ffffffde;
+    font-family: 'Luckiest Guy', cursive;
+    background-color: rgba(0, 0, 0, 0.767);
+    text-align: center;
+    padding: 3%;
+    border-radius: 10px;
+}
+
+
+/* PAGE INSCRITPION */
+
+.gifmonster {
+    width: 93%;
+}

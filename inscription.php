@@ -12,26 +12,17 @@ $user = new user();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/index.css">
     <title>Inscription</title>
 </head>
 
-<style>
-
-.gifmonster{
-    width: 93%;
-}
-
-body{
-    background-image: linear-gradient(to right top, #a1bfec, #7abadc, #5db2c4, #54a9a5, #5b9d84);
-}
-
-
-</style>
 
 <body>
 
     <header>
-        <?php include("header.php"); ?>
+        <?php include("includes/header.php"); ?>
     </header>
 
     <main>
@@ -39,7 +30,7 @@ body{
 
         <div class="row ">
 
-            <div class="col-4">
+            <div class="col-5">
                 <div class="container align-items center">
                     <h4>Inscription au pays des monstres gentils !</h4><br>
 
@@ -55,29 +46,32 @@ body{
 
                         $user->register($login, $password, $password_check, $avatar);
                     }
+                    else{
+                        echo "<img src=\"img/green.png\">";
+                    }
                         
                         ?>
                   
                 </div>
             </div>
-            <div class="col-5 ">
+            <div class="col-5">
                 <div class="container">
 
                     <form action="inscription.php" method="POST">
 
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Login</label>
-                            <input type="text" class="form-control" name="login" placeholder="Enter Login">
+                            <label>Pseudo</label>
+                            <input type="text" class="form-control" name="login" placeholder="Entre le pseudo">
                         </div><br>
 
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" name="password" placeholder="Password"><br>
+                            <label>Mot de Passe</label>
+                            <input type="password" class="form-control" name="password" placeholder="Entre le mot de passe"><br>
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputPassword1">Confirmation Password</label>
-                            <input type="password" class="form-control" name="password_check" placeholder="Confirmation Password"><br>
+                            <label>Confirmation du mot de passe</label>
+                            <input type="password" class="form-control" name="password_check" placeholder="Entre la confirmation du mot de passe"><br>
                         </div><br>
 
                         <div class="form-group form-group-image-checkbox is-invalid">
@@ -126,7 +120,7 @@ body{
     </main>
 
     <footer>
-        <?php include("footer.php"); ?>
+        <?php include("includes/footer.php"); ?>
     </footer>
 
 </body>

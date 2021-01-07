@@ -15,9 +15,9 @@ class messages
         if (!empty($message)) {
             $output = "";
             if (count($message) > 0) {
-                $output .= "<ul id='error'>";
+                $output .= "<ul id='error'>ATTENTION ! <br><br>";
                 foreach ($message as $errors) {
-                    $output .= "<li class=text-danger text-justify>" . $errors . "</li><br>";
+                    $output .= "<li class= mess text-justify>" . $errors . "</li><br>";
                 }
                 $output .= "</ul>";
             } else {
