@@ -25,3 +25,57 @@ nav a:hover {
     color: #f5384a;
 }
 
+/*Profil-utilisateur*/
+.info
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 50px;
+    color: #ffe817;
+}
+.best-games
+{
+    font-size: 30px;
+    color: white;
+    font-family: 'Luckiest Guy', cursive;
+    text-align: center;
+    width: 800px;
+    height: 400px;
+    background-color: #3E0F71;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 20px;
+    margin-bottom: 30px;
+
+}
+.last-games
+{
+    font-size: 30px;
+    color: white;
+    font-family: 'Luckiest Guy', cursive;
+    text-align: center;
+    width: 800px;
+    height: 400px;
+    background-color: #3E0F71;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 20px;
+
+}
+.title_hall
+{
+    color: #ffe817;
+    text-align: center;
+    font-family: 'Luckiest Guy', cursive;
+    margin: 30px;
+}
+.return
+{
+    font-family: 'Luckiest Guy', cursive;
+    color: #ffe817;
+    text-align: center;
+}

@@ -29,8 +29,7 @@
 </header>
 <main>
     <article>
-        <h1>Mon super article</h1>
-        <p>Bla bla bla</p>
+        <h1>Le 10 des monsters fame</h1>
     </article>
     <aside>
         <p>Plus d'infos</p>

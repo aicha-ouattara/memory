@@ -14,27 +14,31 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg ">
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link active" href="index.php">Accueil </a>
-                <a class="nav-item nav-link" href="inscription.php">Inscription</a>
-                <a class="nav-item nav-link" href="connexion.php">Connexion</a>
-                <a class="nav-item nav-link" href="connexion.php">Jouer</a>
-            </div>
-        </div>
+    <nav>
     </nav>
 </header>
 <main>
-    <article>
-        <h1>Mon super article</h1>
-        <p>Bla bla bla</p>
+    <article class="title_hall">
+        <h1>Check ta progression dans l'univers des petits monstres</h1>
+
+    </article>
+
+    <article class="info">
+        <h1>Ton Nom</h1>
+        <h2>Ton Classement</h2>
+    </article>
+    <article class="best-games">
+        <p>Tes Meilleures parties</p>
+    </article>
+    <h3 class="return">Retour au jeu</h3>
+    <article class="last-games">
+        <p>Tes Dernières parties</p>
     </article>
     <aside>
-        <p>Plus d'infos</p>
+        <p>Wall of fame </p>
     </aside>
 </main>
-<footer>Copyright 2015</footer>
-</body>
+<footer></footer>
+</body><
 </html>
 
