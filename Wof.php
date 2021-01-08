@@ -11,6 +11,7 @@ class Wof
     private $time;
     private $grid;
     private $datetime;
+    private $score;
 
     //Recuparation de toutes les infos du joueur
     public function users_profil_details()
@@ -36,12 +37,24 @@ class Wof
 
 
     //dix meilleurs parties par grille:niveau classé par temps
-    public function top_10($grid)
+    public function top_10_time($grid)
     {
         $bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
         $req = $bdd->prepare("SELECT games.grille, games.datetime, utilisateurs.login, utilisateurs.avatar, DATE_FORMAT(time, '%i:%s') AS time FROM games inner join utilisateurs on games.id_utilisateur =  utilisateurs.id
         WHERE grille = ? ORDER BY games.time ASC LIMIT 10 ");
         $req->execute([$grid]);
+        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+        $bdd = NULL;
+        return $resultat;
+    }
+
+    //dix meilleurs parties par grille:niveau classé par score
+    public function top_10_score($score)
+    {
+        $bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
+        $req = $bdd->prepare("SELECT games.grille, games.datetime, games.score, utilisateurs.login, utilisateurs.avatar, DATE_FORMAT(time, '%i:%s') AS time FROM games inner join utilisateurs on games.id_utilisateur =  utilisateurs.id
+        WHERE grille = ? ORDER BY games.time ASC LIMIT 10 ");
+        $req->execute([$score]);
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
         $bdd = NULL;
         return $resultat;
