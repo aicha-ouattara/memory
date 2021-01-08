@@ -28,14 +28,15 @@
     </nav>
 </header>
 <main>
-    <article>
-        <h1>Le 10 des monsters fame</h1>
+    <section>
+    <article class="top-tip">
+        <h1>WALK OF FAME</h1>
+        <h2><span class="top-10">Top 10</span> des meilleurs petit monstres !</h2>
     </article>
-    <aside>
-        <p>Plus d'infos</p>
-    </aside>
+    </section>
+
 </main>
-<footer>Copyright 2015</footer>
+<footer></footer>
 </body>
 </html>
 

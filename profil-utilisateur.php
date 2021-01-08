@@ -32,14 +32,11 @@
     </article>
     <article class="detail-button">
       <img class="retour-button" src="images/retour.png">
-        <p>Retour</p>
+        <a href="memory.php">Retour</a>
     </article>
     <article class="last-games">
         <p>Tes Dernières parties</p>
     </article>
-    <aside>
-        <p>Wall of fame </p>
-    </aside>
 </main>
 <footer></footer>
 </body>
