@@ -65,6 +65,7 @@
 	class Memory
 	{
 		private $grid;	// Sauvegarde des cartes
+		private $nb_cards;
 		private $turn;  // Sauvegarde du tour
 		private $begin; // Sauvegarde datetime début de partie
 
@@ -73,7 +74,7 @@
 		function __construct($nb_paires = 4)
 		{
 			// Liste de toutes les types possibles de cartes
-			$liste_paires = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+			$liste_paires = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
 
 			// Choix aléatoire d'images en fonction du nombre de paires
 			$selected_cards = array_rand($liste_paires, $nb_paires);
@@ -88,19 +89,21 @@
 			shuffle($memory);
 			// Sauvegarde des cartes dans l'objet
 			$this->grid = $memory;
+			// Sauvegarde du nombre de cartes dans le jeu
+			$this->nb_cards = $nb_paires * 2;
 		}
 
 		public function printMemory()
 		{
 			foreach ($this->grid as $key => $card) {
 				if ($card->flip && $card->validated) {
-					echo "<button class='btn btn-primary' name='card' type='submit' value=".$key.' disabled'.">".$card->value."</button>";
+					echo "<button class='btn btn-primary ".$card->value."' name='card' type='submit' value=".$key.' disabled'."></button>";
 				}
 				elseif ($card->flip && !$card->validated) {
-					echo "<button class='btn btn-primary' name='card' type='submit' value=".$key.">".$card->value."</button>";
+					echo "<button class='btn btn-primary ".$card->value."' name='card' type='submit' value=".$key."></button>";
 				}
 				else {
-					echo "<button class='btn btn-primary' name='card' type='submit' value=".$key.">X</button>";
+					echo "<button class='btn btn-primary hidden' name='card' type='submit' value=".$key."></button>";
 				}
 			}
 		}
@@ -124,6 +127,18 @@
 			return $positions;
 		}
 
+		//Recherche le nombre de cartes validées
+		public function validatedCards()
+		{
+			$nb_of_cards = 0;
+			foreach ($this->grid as $key => $card) {
+				if ($card->validated == true){
+					$nb_of_cards++;
+				}
+			}
+			return $nb_of_cards;
+		}
+
 		// Vérifie si deux cartes correspondent
 		public function checkFlippedCards($positions)
 		{
@@ -136,9 +151,9 @@
 
 		public function update($card_number)
 		{
-
-			// Vérifier si deux cartes déjà actives et retournées
+			// Vérifie les cartes actives et retournées
 			$positions = $this->flippedCards();
+
 			if (count($positions) == 2) {
 				// Si oui vérifier leur correspondance
 				$correspond = $this->checkFlippedCards($positions);
@@ -152,26 +167,47 @@
 					$this->grid[$positions[0]]->flip();
 					$this->grid[$positions[1]]->flip();
 				}
-				// Et on retourne la nouvelle carte
-				$this->grid[$card_number]->flip();
+				// Et on retourne la nouvelle carte si cachée
+				if ($this->grid[$card_number]->flip == false) {
+					$this->grid[$card_number]->flip();
+				}
 			}
+
 			// Si une seule carte active
 			elseif (count($positions) == 1) {
-				// On retourne la nouvelle carte
-				$this->grid[$card_number]->flip();
-				// On ajoute la carte retournée à la liste des positions
-				$positions[] = $card_number;
-				// On vérifie leur correspondance
-				$correspond = $this->checkFlippedCards($positions);
-				// Si elles correspondent les désactiver
-				if ($correspond) {
-					$this->grid[$positions[0]]->validate();
-					$this->grid[$positions[1]]->validate();
+				// Et on retourne la nouvelle carte si cachée
+				if ($this->grid[$card_number]->flip == false) {
+					$this->grid[$card_number]->flip();
 				}
+				// On retourne la nouvelle carte
+				//$this->grid[$card_number]->flip();
+				// On ajoute la carte retournée à la liste des positions
+				if ($card_number != $positions[0]) {
+					$positions[] = $card_number;
+					// On vérifie leur correspondance
+					$correspond = $this->checkFlippedCards($positions);
+					// Si elles correspondent les désactiver
+					if ($correspond) {
+						$this->grid[$positions[0]]->validate();
+						$this->grid[$positions[1]]->validate();
+					}
+				}
+
+
 			}
 			// Sinon on retourne juste la nouvelle carte
 			else {
-				$this->grid[$card_number]->flip();
+				if ($this->grid[$card_number]->flip == false) {
+					$this->grid[$card_number]->flip();
+				}
+			}
+
+			$validatedCards = $this->validatedCards();
+			// Vérification si partie terminée
+			if ($validatedCards == $this->nb_cards) {
+				return true;
+			}else {
+				return false;
 			}
 		}
 	}

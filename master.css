@@ -1,15 +1,49 @@
-.dos{
-	height: 20vh;
-	width : 30vh;
-	background-image: url('dos_carte.jpg');
-	background-size: contain;
-	background-repeat: no-repeat;
+.btn{
+	height: 100px;
+	width: 100px;
+
+}
+.hidden{
+	background-image: url('hidden.png') !important;
+	background-size: cover;
 }
 
-.face{
-	height: 20vh;
-	width : 30vh;
-	background-image: url('carte.jpg');
+.A{
+	background-image: url('A.png');
 	background-size: contain;
-	background-repeat: no-repeat;
+}
+
+.B{
+	background-image: url('B.png');
+	background-size: contain;
+}
+
+.C{
+	background-image: url('C.png');
+	background-size: contain;
+}
+
+.D{
+	background-image: url('D.png');
+	background-size: contain;
+}
+
+.E{
+	background-image: url('E.png');
+	background-size: contain;
+}
+
+.F{
+	background-image: url('F.png');
+	background-size: contain;
+}
+
+.G{
+	background-image: url('G.png');
+	background-size: contain;
+}
+
+.H{
+	background-image: url('H.png');
+	background-size: contain;
 }
