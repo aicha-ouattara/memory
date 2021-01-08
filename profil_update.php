@@ -27,27 +27,29 @@ foreach ($result as $value) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/index.css">
     <title>Modification profil</title>
 </head>
 
 <body>
 
     <header>
-        <?php include("header.php"); ?>
+        <?php include("includes/header.php"); ?>
     </header>
 
     <main>
+        <div class="row ">
 
+            <div class="col-5 ">
+                <div class="container-fluid">
 
-        <div class="row justify-content-center">
-
-            <div class="col-3">
-
-                <h3> BONJOUR <?php echo $user->getLogin(); ?> ! </h3><br><br>
+                <h3 class="pseudo_profil"><?php echo $user->getLogin(); ?> ! </h3><br>
 
                 <?php
 
-                echo $avatar;
+                echo $avatar ."<br>";
 
                 if (isset($_POST['submit'])) {
                     $login = htmlspecialchars($_POST['login']);
@@ -57,12 +59,12 @@ foreach ($result as $value) {
 
                     $user->update_profile($login, $password, $password_check, $avatar);
                 } ?>
-
+</div>
             </div>
 
-            <div class="col-5 offset-1">
+            <div class="col-5 ">
                 <div class="container">
-                    <h1>Modifier les données de votre profil</h1>
+                    <h4>Modifier les données de votre profil</h4>
 
                     <form action="profil_update.php" method="POST">
 
@@ -127,7 +129,7 @@ foreach ($result as $value) {
     </main>
 
     <footer>
-        <?php include("footer.php"); ?>
+        <?php include("includes/footer.php"); ?>
     </footer>
 
 </body>

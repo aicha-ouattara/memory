@@ -314,3 +314,36 @@ label {
     width: 50%;
     animation: jump 4s linear 0s infinite normal;
 }
+
+
+/* PAGE CONNEXION */
+
+.titreconn {
+    color: #ffffffde;
+    font-family: 'Luckiest Guy', cursive;
+    background-color: rgba(0, 0, 0, 0.767);
+    text-align: center;
+    padding: 3%;
+    border-radius: 10px;
+    margin-right: 10%;
+}
+
+
+/* PAGE UPDATE PROFIL */
+
+.avatar {
+    width: 30%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid white;
+    padding: 2%;
+    background-color: rgba(0, 0, 0, 0.664);
+}
+
+.pseudo_profil {
+    text-align: center;
+    font-size: 2em;
+    color: white;
+    font-family: 'Luckiest Guy', cursive;
+}

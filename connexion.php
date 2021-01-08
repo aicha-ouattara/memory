@@ -27,8 +27,12 @@ $user = new user;
     </header>
 
     <main>
-        <div class="row align-items-center">
 
+    <div class="row align-items-center">
+        <h4 class="titreconn">Connexion à ton compte de petit monstre !</h4>
+    </div>
+        <div class="row align-items-center">
+       
             <div class="col-4 ">
                 <div class="container align-item center">
                     <?php
@@ -41,9 +45,14 @@ $user = new user;
                     ?>
                 </div>
             </div>
+          
             <div class="col-5 ">
+          
+                    
+           
+           
                 <div class="container">
-            <h4>Connexion à ton compte de petit monstre</h4><br>
+         
 
                    
 
