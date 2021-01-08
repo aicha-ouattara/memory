@@ -31,7 +31,7 @@ $user = new user();
         <div class="row">
 
             <div class="col-5">
-                <div class="container align-items center">
+                <div class="mess container align-items center">
                     <h4>Inscription au pays des monstres gentils !</h4><br>
 
                     <?php

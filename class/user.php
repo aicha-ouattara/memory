@@ -168,6 +168,7 @@ class user
         if (empty($errors)) {
             $update = $db->prepare("UPDATE utilisateurs SET login = ? , password = ?, avatar = ? WHERE id = ?");
             $update->execute(array($login, $passwordHash, $avatar, $this->id));
+            header("location:profil_update.php");
         }
          else {
             $message = new messages($errors);

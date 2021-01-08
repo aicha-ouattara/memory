@@ -5,6 +5,10 @@
 
 /* ELEMENTS COMMUN A TOUTES LES PAGES */
 
+.row {
+    margin: 0%;
+}
+
 
 /* NAV & BODY */
 
@@ -236,22 +240,75 @@ audio::-webkit-media-controls-play-button {
     animation: jump 4s linear 0s infinite normal;
 }
 
-.imgclass {
-    margin-top: 2%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
+
+/* TABLEAU WALL OF FAME */
+
+.table_class {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: 3px solid white;
+    width: 85%;
+    margin-left: 5%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+    background-color: rgba(0, 0, 0, 0.411);
+    color: white;
+    padding: 1%;
 }
+
+.table_class table {
+    table-layout: fixed;
+}
+
+.table_class td {
+    border-bottom: 1px solid white;
+    text-align: center;
+}
+
+.table_class tr {
+    text-align: center;
+}
+
+.div_data {
+    width: 100%;
+}
+
+.table_data {
+    width: 100%;
+}
+
+.table_classement {}
+
+
+/* FIN PAGE INDEX */
 
 .title_play {
     font-size: 2em;
     color: #ffe817de;
     font-family: 'Luckiest Guy', cursive;
+    text-align: center;
+}
+
+.play h4:hover {
+    color: coral;
 }
 
 .play a {
     text-decoration: none;
+}
+
+.arrowred {
+    margin-left: 70%;
+    position: absolute;
+    transform: rotate(-10deg);
+}
+
+.arrowred:hover {
+    /* width: 20%; */
+    transform: rotate(-30deg);
+    /* transform: scale(2); */
+    transition: 1s;
 }
 
 
@@ -313,6 +370,17 @@ label {
     margin-top: 5%;
     width: 50%;
     animation: jump 4s linear 0s infinite normal;
+}
+
+.mess a {
+    font-size: 1.5em;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.mess a:hover {
+    text-decoration: underline;
 }
 
 

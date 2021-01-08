@@ -64,23 +64,23 @@ foreach ($result as $value) {
 
             <div class="col-5 ">
                 <div class="container">
-                    <h4>Modifier les données de votre profil</h4>
+                    <h4>Modifier les données de ton profil</h4>
 
                     <form action="profil_update.php" method="POST">
 
                         <div class="form-group">
-                            <label>Login</label>
-                            <input type="text" class="form-control" name="login" placeholder="Enter Login">
+                            <label>Pseudo</label>
+                            <input type="text" class="form-control" name="login" placeholder="Entrer le pseudo">
                         </div><br>
 
                         <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" class="form-control" name="password" placeholder="Password"><br>
+                            <label>Mot de passe</label>
+                            <input type="password" class="form-control" name="password" placeholder="Entrer le mot de passe"><br>
                         </div>
 
                         <div class="form-group">
-                            <label>Confirmation Password</label>
-                            <input type="password" class="form-control" name="password_check" placeholder="Confirmation Password"><br>
+                            <label>Confirmation Mot de passe</label>
+                            <input type="password" class="form-control" name="password_check" placeholder="Confirmation mot de passe"><br>
                         </div><br>
 
                         <div class="form-group form-group-image-checkbox is-invalid">
@@ -120,7 +120,7 @@ foreach ($result as $value) {
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" name="submit" class="btn btn-primary">Modifier mon profil</button>
+                        <br><button type="submit" name="submit" class="btn btn-primary">Modifier mon profil</button>
                     </form>
 
                 </div>
