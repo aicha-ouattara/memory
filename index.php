@@ -17,9 +17,13 @@
         <?php include("includes/header.php"); ?>
 
         <section class="home">
-            <img src="img/monsterred.png" class="monster">
-            <h1>MONSTER MEMORY</h1>
-            <img src="img/yellow.png" class="monster">
+
+            <div><img src="img/monsterred.png" class="monster"></div>
+            <div>
+                <h1>MONSTER MEMORY</h1>
+                <a href="memory.php"><h4 class="button_play">JOUER !</h4></a>
+            </div>
+            <div><img src="img/yellow.png" class="monster"></div>
         </section>
 
         <a href="#container_home"><img src="img/arrow.png" class="arrow"></a>

@@ -28,7 +28,7 @@ $user = new user();
     <main>
 
 
-        <div class="row ">
+        <div class="row">
 
             <div class="col-5">
                 <div class="container align-items center">
@@ -47,7 +47,7 @@ $user = new user();
                         $user->register($login, $password, $password_check, $avatar);
                     }
                     else{
-                        echo "<img src=\"img/green.png\">";
+                        echo "<img src=\"img/hellobluemonster.png\" class=\"hellobluemonster_inscr\">";
                     }
                         
                         ?>
@@ -111,7 +111,7 @@ $user = new user();
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" name="submit" class="btn btn-primary">S'inscrire</button>
+                        <br><button type="submit" name="submit" class="btn btn-primary">S'inscrire</button>
                     </form>
 
                 </div>

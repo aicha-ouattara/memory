@@ -8,4 +8,7 @@
       <a class="nav-item nav-link" href="connexion.php">Jouer</a>
     </div>
   </div>
+  
+
+<audio controls="" loop ><source src="img/play_music.mp3" /></audio> 
 </nav>
