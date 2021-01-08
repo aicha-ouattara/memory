@@ -71,10 +71,28 @@
 		private $time;		// Temps écoulé
 		private $score;		// Score
 		private $date; 		// Sauvegarde datetime début de partie
+		private $row_len;	// Pour affichae
+		//private $mode;
 
 
 
-		function __construct($nb_paires = 4)
+		function __construct($nb_paires = 3)
+		{
+			// Création de la grille
+			$this->grid = $this->createGrid($nb_paires);
+			// Sauvegarde du nombre de cartes dans le jeu
+			$this->nb_cards = $nb_paires * 2;
+			// Initialisation du nombre de tours
+			$this->turn = 0;
+			// Initialisation du Score
+			$this->score = 0;
+			// Initialisation du chrono
+			$this->beginTime = Null;
+			// Sauvegarde DateTime de création de la partie
+			$this->date = new DateTime();
+		}
+
+		public function createGrid($nb_paires)
 		{
 			// Liste de toutes les types possibles de cartes
 			$liste_paires = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
@@ -90,18 +108,8 @@
 			}
 			// Mélange de la grille (donc des paires)
 			shuffle($memory);
-			// Sauvegarde des cartes dans l'objet
-			$this->grid = $memory;
-			// Sauvegarde du nombre de cartes dans le jeu
-			$this->nb_cards = $nb_paires * 2;
-			// Initialisation du nombre de tours
-			$this->turn = 0;
-			// Initialisation du Score
-			$this->score = 0;
-			// Initialisation du chrono
-			$this->beginTime = Null;
-			// Sauvegarde DateTime
-			$this->date = new DateTime();
+			// retour de la grille
+			return $memory;
 		}
 
 		public function beginGame()
@@ -133,12 +141,12 @@
 
 		public function win()
 		{
-			$this->score+= $this->turn / $this->time;
+			$this->score+= $this->turn / $this->getTime();
 		}
 
 		public function lose()
 		{
-			$this->score-= $this->turn / $this->time;
+			$this->score-= $this->turn / $this->getTime();
 		}
 
 		public function printMemory()

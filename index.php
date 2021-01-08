@@ -20,10 +20,10 @@
 			// Protection contre accès à un autre level
 			$_SESSION['grid'] = new Memory(3);
 		}
+
 		// Sinon on joue le niveau demandé
 		else {
 			$_SESSION['grid'] = new Memory($_GET['level']);
-			$_SESSION['mode'] = Null;
 		}
 		// Début chrono
 		$_SESSION['grid']->beginGame();
@@ -136,6 +136,34 @@
 			echo "<button class='btn btn-primary' name='restart' type='submit' value='1'>Rejouer</button>";
 		}
 		?>
+		<div class="container">
+			<?php foreach ($memory->getGrid() as $key => $card): ?>
+
+				<?php if ($key % 3 == 0 && $key != 0): ?>
+					</div>
+				<?php endif; ?>
+
+				<?php if ($key % 3 == 0): ?>
+					<div class="row">
+				<?php endif; ?>
+
+
+
+				<?php if ($card->flip && $card->validated): ?>
+					<div class="col"><button class='btn btn-primary <?php echo $card->value ?>' name='card' type='submit' value='<?php echo $key ?>' disabled></button></div>
+				<?php elseif ($card->flip && !$card->validated): ?>
+					<div class="col"><button class='btn btn-primary <?php echo $card->value ?>' name='card' type='submit' value="<?php echo $key ?>"></button></div>
+				<?php else: ?>
+					<div class="col"><button class='btn btn-primary hidden' name='card' type='submit' value="<?php echo $key ?>"></button></div>
+				<?php endif; ?>
+
+
+
+
+
+
+			<?php endforeach; ?>
+		</div>
 
 	</form>
 
