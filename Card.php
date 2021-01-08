@@ -64,10 +64,13 @@
 	 */
 	class Memory
 	{
-		private $grid;	// Sauvegarde des cartes
-		private $nb_cards;
-		private $turn;  // Sauvegarde du tour
-		private $begin; // Sauvegarde datetime début de partie
+		private $grid;		// Sauvegarde des cartes
+		private $nb_cards;	// Nombre de cartes
+		private $turn;  	// Sauvegarde du tour
+		private $beginTime; // debut chrono
+		private $time;		// Temps écoulé
+		private $score;		// Score
+		private $date; 		// Sauvegarde datetime début de partie
 
 
 
@@ -91,6 +94,51 @@
 			$this->grid = $memory;
 			// Sauvegarde du nombre de cartes dans le jeu
 			$this->nb_cards = $nb_paires * 2;
+			// Initialisation du nombre de tours
+			$this->turn = 0;
+			// Initialisation du Score
+			$this->score = 0;
+			// Initialisation du chrono
+			$this->beginTime = Null;
+			// Sauvegarde DateTime
+			$this->date = new DateTime();
+		}
+
+		public function beginGame()
+		{
+			$this->beginTime = microtime(true);
+		}
+
+		public function getGrid()
+		{
+			return $this->grid;
+		}
+
+		public function getTime()
+		{
+			$now = microtime(true);
+			$this->time = $now - $this->beginTime;
+			return $this->time;
+		}
+
+		public function getTurn()
+		{
+			return $this->turn;
+		}
+
+		public function getScore()
+		{
+			return $this->score;
+		}
+
+		public function win()
+		{
+			$this->score+= $this->turn / $this->time;
+		}
+
+		public function lose()
+		{
+			$this->score-= $this->turn / $this->time;
 		}
 
 		public function printMemory()
@@ -149,7 +197,7 @@
 			}
 		}
 
-		public function update($card_number)
+		public function updateGrid($card_number)
 		{
 			// Vérifie les cartes actives et retournées
 			$positions = $this->flippedCards();
@@ -159,11 +207,13 @@
 				$correspond = $this->checkFlippedCards($positions);
 				// Si elles correspondent les désactiver
 				if ($correspond) {
+					$this->win();
 					$this->grid[$positions[0]]->validate();
 					$this->grid[$positions[1]]->validate();
 				}
 				// Sinon les retourner
 				else {
+					$this->lose();
 					$this->grid[$positions[0]]->flip();
 					$this->grid[$positions[1]]->flip();
 				}
@@ -179,8 +229,6 @@
 				if ($this->grid[$card_number]->flip == false) {
 					$this->grid[$card_number]->flip();
 				}
-				// On retourne la nouvelle carte
-				//$this->grid[$card_number]->flip();
 				// On ajoute la carte retournée à la liste des positions
 				if ($card_number != $positions[0]) {
 					$positions[] = $card_number;
@@ -188,8 +236,12 @@
 					$correspond = $this->checkFlippedCards($positions);
 					// Si elles correspondent les désactiver
 					if ($correspond) {
+						$this->win();
 						$this->grid[$positions[0]]->validate();
 						$this->grid[$positions[1]]->validate();
+					}
+					else {
+						$this->lose();
 					}
 				}
 
@@ -198,10 +250,15 @@
 			// Sinon on retourne juste la nouvelle carte
 			else {
 				if ($this->grid[$card_number]->flip == false) {
+					$this->lose();
 					$this->grid[$card_number]->flip();
 				}
 			}
+		}
 
+		public function checkGameOver()
+		{
+			// Comptage du nombre de cartes validées
 			$validatedCards = $this->validatedCards();
 			// Vérification si partie terminée
 			if ($validatedCards == $this->nb_cards) {
@@ -209,6 +266,22 @@
 			}else {
 				return false;
 			}
+		}
+
+		public function update($card_number)
+		{
+			if ($this->grid[$card_number]->flip == false) {
+				// Incrémentation du nombre de tours
+				$this->turn++;
+			}
+
+			// Mise à jour de la grille
+			$this->updateGrid($card_number);
+
+			// Vérif si partie terminée
+			return $this->checkGameOver();
+
+
 		}
 	}
 

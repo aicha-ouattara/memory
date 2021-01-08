@@ -11,18 +11,26 @@
 
 	// Si début de partie, utiliser le GET (level) pour créer la grille
 	if (isset($_GET['level']) && !isset($_SESSION['grid'])) {
-		$_SESSION['grid'] = new Memory($_GET['level'], );
 		// enregistrement du niveau
 		$_SESSION['level'] = $_GET['level'];
+		// Si information de mode de jeu -> chelem
+		if (isset($_GET['mode']) && $_GET['mode'] == 'chelem') {
+			// enregistrement chelem
+			$_SESSION['mode'] = 'chelem';
+			// Protection contre accès à un autre level
+			$_SESSION['grid'] = new Memory(3);
+		}
+		// Sinon on joue le niveau demandé
+		else {
+			$_SESSION['grid'] = new Memory($_GET['level']);
+			$_SESSION['mode'] = Null;
+		}
+		// Début chrono
+		$_SESSION['grid']->beginGame();
+	}
 
-	}
-	// Si information de mode de jeu
-	if (isset($_GET['mode'])) {
-		// enregistrement chelem
-		$_SESSION['mode'] = $_GET['mode'];
-	}
-	// Sinon c'est que la partie est en cours et on la récupère de la session
-	$grid = $_SESSION['grid'];
+	// Récupération de la partie débutée ou en cours
+	$memory = $_SESSION['grid'];
 
 
 				////////// Options de partie ///////
@@ -46,7 +54,7 @@
 	// Si le user a gagné et est dans un grand chelem
 	// On passe au niveau suivant en automatique
 	if (isset($_POST['next']) && isset($_SESSION['mode']) && $_SESSION['mode'] == 'chelem') {
-		session_destroy();
+		$_SESSION['grid'] = Null;
 		header('Location: ?level='.($_SESSION['level']+1));
 	}
 
@@ -55,11 +63,14 @@
 	// Si retour de carte cliquée
 	if (isset($_POST['card'])) {
 		// Mise à jour de la grille en envoyant la position de la carte sélectionnée
-		$finished = $grid->update($_POST['card']);
+		$finished = $memory->update($_POST['card']);
+		// Récupération du temps / tour / score de la partie
+		$time = $memory->getTime();
+		$turn = $memory->getTurn();
+		$score = $memory->getScore();
+
 		// Vérif si grille terminée
 		if ($finished) {
-			// Récupération du temps / coups / score de la partie
-
 			// Si utilisateur connecté
 				// On ajoute la partie à la base
 
@@ -73,8 +84,17 @@
 
 
 	echo "<pre>";
-	//echo "Get :";
-	//var_dump($_GET);
+	if (isset($turn)) {
+		echo 'Tour : '.$turn.'</br>';
+	}
+	if (isset($time)) {
+		echo 'Temps : '.$time.'</br>';
+	}
+	if (isset($score)) {
+		echo 'Score : '.$score.'</br>';
+	}
+
+
 	//echo "Post :";
 	//var_dump($_POST);
 	//echo "Session :";
@@ -112,7 +132,7 @@
 
 		}
 		else {
-			$grid->printMemory();
+			$memory->printMemory();
 			echo "<button class='btn btn-primary' name='restart' type='submit' value='1'>Rejouer</button>";
 		}
 		?>
