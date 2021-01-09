@@ -13,23 +13,25 @@ class Wof
     private $datetime;
     private $score;
 
+
+
     //Recuparation de toutes les infos du joueur
-    public function users_profil_details()
-    {
-        $bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-        $req = $bdd->prepare("SELECT games.time, games.grille, games.datetime, utilisateurs.login, utilisateurs.avatar FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = utilisateurs.id ");
-        $req->execute();
-        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
-        $bdd = NULL;
-        return $resultat;
-    }
+  public function users_profil_details()
+   {
+       $bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
+       $req = $bdd->prepare("SELECT * FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = utilisateurs.id");
+       $req->execute();
+       $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+       $bdd = NULL;
+       return $resultat;
+   }
 
     //Recuparation des infos de la progression du joueur par grid:niveau
-    public function users_progress($grid)  //$grid ou $id ?
+    public function users_progress($id)  //$grid ou $id ?
     {
         $bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-        $req= $bdd->prepare("SELECT * FROM grille WHERE id_utilisateur = ? ORDER BY score.id DESC LIMIT 5");
-        $req->execute([$grid]);
+        $req= $bdd->prepare("SELECT * FROM games WHERE id_utilisateur = ? ORDER BY games.id DESC LIMIT 5");
+        $req->execute([$id]);
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
         $bdd = NULL;
         return $resultat;
@@ -40,7 +42,7 @@ class Wof
     public function top_10_time($grid)
     {
         $bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-        $req = $bdd->prepare("SELECT games.grille, games.datetime, utilisateurs.login, utilisateurs.avatar, DATE_FORMAT(time, '%i:%s') AS time FROM games inner join utilisateurs on games.id_utilisateur =  utilisateurs.id
+        $req = $bdd->prepare("SELECT * FROM games inner join utilisateurs on games.id_utilisateur =  utilisateurs.id
         WHERE grille = ? ORDER BY games.time ASC LIMIT 10 ");
         $req->execute([$grid]);
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -49,12 +51,12 @@ class Wof
     }
 
     //dix meilleurs parties par grille:niveau classé par score
-    public function top_10_score($score)
+    public function top_10_score($grid)
     {
         $bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-        $req = $bdd->prepare("SELECT games.grille, games.datetime, games.score, utilisateurs.login, utilisateurs.avatar, DATE_FORMAT(time, '%i:%s') AS time FROM games inner join utilisateurs on games.id_utilisateur =  utilisateurs.id
-        WHERE grille = ? ORDER BY games.time ASC LIMIT 10 ");
-        $req->execute([$score]);
+        $req = $bdd->prepare("SELECT * FROM games inner join utilisateurs on games.id_utilisateur =  utilisateurs.id
+        WHERE grille = ? ORDER BY games.score ASC LIMIT 10 ");
+        $req->execute([$grid]);
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
         $bdd = NULL;
         return $resultat;
@@ -64,7 +66,7 @@ class Wof
     public function three_last_games()
     {
         $bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-        $req = $bdd->prepare("SELECT games.time, utilisateurs.login, utilisateurs.avatar FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = utilisateurs.id LIMIT 3");
+        $req = $bdd->prepare("SELECT * FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = utilisateurs.id ORDER BY games.id desc LIMIT 3");
         $req->execute();
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
         $bdd = NULL;
@@ -73,26 +75,31 @@ class Wof
 
 
 
+
 }
 
 
 
-
 $wof = new Wof();
-echo "<pre>";
-var_dump($wof->users_profil_details());
-echo "</pre>";
+//echo "<pre>";
+//var_dump($wof->users_profil_details());
+//echo "</pre>";
 
-echo "<pre>";
-var_dump($wof->users_progress(6));
-echo "</pre>";
-
-echo "<pre>";
-var_dump($wof->top_10(6));
-echo "</pre>";
+//echo "<pre>";
+//var_dump($wof->users_progress(2));
+//echo "</pre>";
+//
+//echo "<pre>";
+//var_dump($wof->top_10_score(6));
+//echo "</pre>";
+//echo "<pre>";
+//var_dump($wof->test2());
+//echo "</pre>";
 
 echo "<pre>";
 var_dump($wof->three_last_games());
 echo "</pre>";
+
+
 
 ?>

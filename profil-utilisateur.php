@@ -1,5 +1,10 @@
 <?php
+include 'wof.php';
+session_start(); //Session connexion
 
+$wof = new Wof;
+
+var_dump($wof);
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +41,11 @@
     </article>
     <article class="last-games">
         <p>Tes Dernières parties</p>
+        <div>
+            <?php
+
+            ?>
+        </div>
     </article>
 </main>
 <footer></footer>
