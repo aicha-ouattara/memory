@@ -1,5 +1,4 @@
 <?php
-require_once 'class/user.php';
 
 
 class Wof
@@ -33,7 +32,7 @@ class Wof
     public static function users_progress_score($id)  //$grid ou $id ?
     {
         $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-        $req= $db->prepare("SELECT time as temps, score, grille as pairs , datetime as date  FROM games WHERE id_utilisateur = ? ORDER BY games.score DESC LIMIT 3");
+        $req= $db->prepare("SELECT time as temps, score, grille as pairs , datetime as date  FROM games WHERE id_utilisateur = ? ORDER BY games.score ");
         $req->execute([$id]);
         $resultat = $req->fetch(PDO::FETCH_ASSOC);
         $bdd = NULL;

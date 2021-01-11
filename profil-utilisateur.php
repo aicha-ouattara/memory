@@ -106,7 +106,7 @@ foreach ($result as $value) {
             <?php
        echo "<div class=\"div_data\" ><table class=\"table_data\">";
        $tab = Wof::users_progress($id);
-       
+
        foreach ($tab as $key => $value) {
            echo "<th class=\"key\">$key</th>";
        }
