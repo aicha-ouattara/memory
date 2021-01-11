@@ -12,7 +12,14 @@ class Wof
     private $grid;
     private $datetime;
     private $score;
+    private $id_utilisateur;
 
+    public function insert_wof($time, $grid, $datetime, $score, $id_utilisateur)
+    {
+        $bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
+        $req_insert = $bdd->prepare("INSERT INTO games ( time , grille , datetime, score, id_utilisateur) VALUES (?, ?, ?, ?, ?)") ;
+        $req_insert->execute([$time, $grid, $datetime, $score, $id_utilisateur]);
+    }
 
     //Recuparation de toutes les infos du joueur : progression individuelle
     public function users_profil_details()
