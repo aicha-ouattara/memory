@@ -52,6 +52,16 @@
 		$memory->nextLevel();
 	}
 
+	if (isset($_POST['wof'])) {
+		$_SESSION['grid'] = Null;
+		header('Location: profil-utilisateur.php');
+	}
+
+	if (isset($_POST['other'])) {
+		$_SESSION['grid'] = Null;
+		header('Location: level_choice.php');
+	}
+
 				////////// Update de la partie ///////////
 
 	// Si retour de carte cliquée
@@ -97,6 +107,11 @@
 </head>
 <body>
 	<?php include "includes/header.php"; ?>
+	<?php if (empty($user)): ?>
+		<div class="connect">
+			<h2>Connecte toi pour sauvegarder ta progression !</h2>
+		</div>
+	<?php endif; ?>
 	<form action="memory.php" method="post">
 
 		<div class="container">
@@ -115,12 +130,15 @@
 			</div>
 
 			<div class="menu_memory">
+
 				<?php if (isset($finished) && $finished): ?>
 					<div class="finished">
 						<h1>Bravo!</h1><br>
 						<h2>Votre temps : <?php echo round ($memory->getTime(), 2) ?> secondes</h2><br>
 						<h2>Nombre de coups : <?php echo $memory->getTurn(); ?></h2>
-						<div><button class='btn btn-primary button_memory' name='wof' type='submit' value='1'>Voir mon classement</button></div>
+						<?php if (isset($user)): ?>
+							<div><button class='btn btn-primary button_memory' name='wof' type='submit' value='1'>Voir ma progression</button></div>
+						<?php endif; ?>
 						<div><button class='btn btn-primary button_memory' name='other' type='submit' value='1'>Autre niveau</button></div>
 					</div>
 				<?php endif; ?>
