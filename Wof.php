@@ -112,7 +112,7 @@ $wof = new Wof();
 //echo "<pre>";
 //var_dump($wof->three_last_games());
 //echo "</pre>";
-// 
+//
 // echo "<pre>";
 // var_dump($wof->insert_wof("OO:21:37", 3, "2021-01-11 12:42:31", 6, 6));
 // echo "</pre>";
