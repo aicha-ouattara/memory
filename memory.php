@@ -1,7 +1,8 @@
 <?php
 	include 'Card.php';
-	include 'Wof.php';
 	include 'class/user.php';
+	include 'Wof.php';
+
 
 	// Demarrage session
 	session_start();

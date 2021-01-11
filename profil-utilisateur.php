@@ -85,12 +85,12 @@ foreach ($result as $value) {
             echo "<div class=\"div_data\" ><table class=\"table_data\">";
             $tab = Wof::users_progress_score($id);
 
-                    foreach ($tab as $key => $value) {
-                        echo "<th class=\"key\">$key</th>";
-                    }
+            foreach ($tab as $key => $value) {
+            	echo "<th class=\"key\">$key</th>";
+            }
 
                 echo "<tr>";
-                foreach ($tab as $key => $value) {
+                foreach ($tab as  $value) {
                     echo "<td>" . $value . "</td>";
                 }
                 echo "</tr>";
@@ -105,16 +105,28 @@ foreach ($result as $value) {
         <article class="table_class">
             <?php
        echo "<div class=\"div_data\" ><table class=\"table_data\">";
-       $tab = Wof::users_progress($id);
-       
-       foreach ($tab as $key => $value) {
-           echo "<th class=\"key\">$key</th>";
-       }
+       $tab2 = Wof::users_progress($id);
 
-       echo "<tr>";
-       foreach ($tab as $key => $value) {
-           echo "<td>" . $value . "</td>";
-       }
+		foreach ($tab2 as $key => $value) {
+
+			if ($key == 0) {
+				foreach ($value as $col) {
+					echo "<th class=\"key\">$col</th>";
+				}
+			}else {
+				foreach ($value as $col) {
+					echo "<td>" . $col . "</td>";
+				}
+			}
+			echo "</tr>";
+		}
+
+
+
+       // echo "<tr>";
+       // foreach ($tab2 as $value) {
+       //     echo "<td>" . $value . "</td>";
+       // }
        echo "</tr>";
        echo "</div></table>";?>
 
