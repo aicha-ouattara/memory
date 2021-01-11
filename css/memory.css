@@ -1,0 +1,69 @@
+.btn{
+	height: 100px;
+	width: 100px;
+
+}
+.hidden{
+	background-image: url('../img/arrowred.png') !important;
+	background-size: cover;
+}
+
+.A{
+	background-image: url('../img/1.png');
+	background-size: contain;
+}
+
+.B{
+	background-image: url('../img/2.png');
+	background-size: contain;
+}
+
+.C{
+	background-image: url('../img/3.png');
+	background-size: contain;
+}
+
+.D{
+	background-image: url('../img/4.png');
+	background-size: contain;
+}
+
+.E{
+	background-image: url('../img/184a994e882ffe3555ac7f06a3acef1e - Copie (2).png');
+	background-size: contain;
+}
+
+.F{
+	background-image: url('../img/184a994e882ffe3555ac7f06a3acef1e - Copie (3).png');
+	background-size: contain;
+}
+
+.G{
+	background-image: url('../img/184a994e882ffe3555ac7f06a3acef1e - Copie (5).png');
+	background-size: contain;
+}
+
+.H{
+	background-image: url('../img/184a994e882ffe3555ac7f06a3acef1e - Copie.png');
+	background-size: contain;
+}
+
+.I{
+	background-image: url('../img/a33b296eb4e9b4d7a4e914b90e1f93ed - Copie (3).png');
+	background-size: contain;
+}
+
+.J{
+	background-image: url('../img/a33b296eb4e9b4d7a4e914b90e1f93ed - Copie (4).png');
+	background-size: contain;
+}
+
+.K{
+	background-image: url('../img/a33b296eb4e9b4d7a4e914b90e1f93ed - Copie (5).png');
+	background-size: contain;
+}
+
+.L{
+	background-image: url('../img/a33b296eb4e9b4d7a4e914b90e1f93ed - Copie (6).png');
+	background-size: contain;
+}
