@@ -77,7 +77,7 @@
 		if ($finished && ($memory->getLevel() == 12 || $memory->getMode() == 'one')) {
 			// Si utilisateur connecté
 			if (isset($user)) {
-				Wof::insert_wof($memory->getTime(), $memory->getLevel(), $memory->getDate()->format('Y-m-d'), $memory->getTurn(), $user->getId());
+				Wof::insert_wof($memory->getTime(), $memory->getLevel(), $memory->getDate()->format('Y-m-d H:i:s'), $memory->getTurn(), $user->getId());
 			}
 				// On ajoute la partie à la base
 
