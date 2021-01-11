@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le :  lun. 11 jan. 2021 à 08:54
+-- Généré le :  lun. 11 jan. 2021 à 08:57
 -- Version du serveur :  5.7.26
 -- Version de PHP :  7.4.2
 
@@ -46,6 +46,29 @@ INSERT INTO `games` (`id`, `time`, `grille`, `datetime`, `score`, `id_utilisateu
 (4, '00:20:39', 6, '2021-01-07 09:01:39', 6, 4),
 (5, '00:10:39', 3, '2021-01-07 09:01:39', 6, 5);
 
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `utilisateurs`
+--
+
+CREATE TABLE `utilisateurs` (
+  `id` int(11) NOT NULL,
+  `login` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `avatar` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `utilisateurs`
+--
+
+INSERT INTO `utilisateurs` (`id`, `login`, `password`, `avatar`) VALUES
+(1, 'cha', 'cha', '3'),
+(2, 'lou', 'lou', '1'),
+(3, 'pam', 'pam', '2'),
+(4, 'zaa', 'za', '4');
+
 --
 -- Index pour les tables déchargées
 --
@@ -57,6 +80,12 @@ ALTER TABLE `games`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index pour la table `utilisateurs`
+--
+ALTER TABLE `utilisateurs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
@@ -65,6 +94,12 @@ ALTER TABLE `games`
 --
 ALTER TABLE `games`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT pour la table `utilisateurs`
+--
+ALTER TABLE `utilisateurs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
