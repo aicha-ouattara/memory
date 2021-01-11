@@ -1,24 +1,20 @@
 <?php
-require_once 'wof.php';
+require_once 'Wof.php';
 require_once 'class/user.php';
 session_start(); //Session connexion
+
+//$wof = new Wof;
+//var_dump($wof);
+//$user = new User;
 
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
 }
 
-// $bdd =new PDO("mysql:host=localhost;dbname=memory","root","root");
-
-$bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-
-$req = $bdd->prepare("SELECT login, time, score, grille, datetime as date  FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = utilisateurs.id limit 3");
-$req->execute();
-
 $id = $user->getId();
+
+// RECUP AVATAR
 $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-
-// RECUP AVATAR 
-
 $data = $db->prepare("SELECT avatar FROM utilisateurs WHERE id = $id");
 $data->execute(array($id));
 $result = $data->fetch(PDO::FETCH_ASSOC);
@@ -86,23 +82,18 @@ foreach ($result as $value) {
                 </table>
             </div>
             <?php
-            $i = 0;
-
             echo "<div class=\"div_data\" ><table class=\"table_data\">";
-            while ($result = $req->fetch(PDO::FETCH_ASSOC)) {
-                if ($i == 0) {
-                    foreach ($result as $key => $value) {
+            $tab = Wof::users_progress_score($id);
+
+                    foreach ($tab as $key => $value) {
                         echo "<th class=\"key\">$key</th>";
                     }
-                    $i++;
-                }
+
                 echo "<tr>";
-                foreach ($result as $key => $value) {
+                foreach ($tab as $key => $value) {
                     echo "<td>" . $value . "</td>";
                 }
                 echo "</tr>";
-            }
-
             echo "</div></table>";
             ?>
 
@@ -113,25 +104,19 @@ foreach ($result as $value) {
 
         <article class="table_class">
             <?php
-            $i = 0;
+       echo "<div class=\"div_data\" ><table class=\"table_data\">";
+       $tab = Wof::users_progress($id);
+       
+       foreach ($tab as $key => $value) {
+           echo "<th class=\"key\">$key</th>";
+       }
 
-            echo "<div class=\"div_data\" ><table class=\"table_data\">";
-            while ($result = $req->fetch(PDO::FETCH_ASSOC)) {
-                if ($i == 0) {
-                    foreach ($result as $key => $value) {
-                        echo "<th class=\"key\">$key</th>";
-                    }
-                    $i++;
-                }
-                echo "<tr>";
-                foreach ($result as $key => $value) {
-                    echo "<td>" . $value . "</td>";
-                }
-                echo "</tr>";
-            }
-
-            echo "</div></table>";
-            ?>
+       echo "<tr>";
+       foreach ($tab as $key => $value) {
+           echo "<td>" . $value . "</td>";
+       }
+       echo "</tr>";
+       echo "</div></table>";?>
 
         </article>
 
