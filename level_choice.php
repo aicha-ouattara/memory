@@ -1,6 +1,9 @@
 <?php
 
 session_start();
+if (isset($_SESSION['grid']) && $_SESSION['grid'] != Null) {
+	$_SESSION['grid'] = Null;
+}
 ?>
 
 <!doctype html>
@@ -32,9 +35,9 @@ session_start();
 	</div>
 
 <div class="container">
-	<article class="level"> 
+	<article class="level">
 
-	<a href="memory.php?level=3&mode=one">3</a> 
+	<a href="memory.php?level=3&mode=one">3</a>
 	<a href="memory.php?level=4&mode=one">4</a>
 	<a href="memory.php?level=5&mode=one">5</a>
 	<a href="memory.php?level=6&mode=one">6</a>

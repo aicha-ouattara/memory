@@ -163,6 +163,11 @@
 			return $this->time;
 		}
 
+		public function getDate()
+		{
+			return $this->date;
+		}
+
 		public function getTurn()
 		{
 			return $this->turn;

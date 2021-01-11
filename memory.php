@@ -1,10 +1,14 @@
 <?php
 	include 'Card.php';
 	include 'Wof.php';
+	include 'class/user.php';
 
 	// Demarrage session
 	session_start();
 	//session_destroy();
+	if (isset($_SESSION['user'])) {
+		$user = $_SESSION['user'];
+	}
 
 
 				///////// Initialisation partie //////////
@@ -60,8 +64,11 @@
 		$score = $memory->getScore();
 
 		// Vérif si grille terminée
-		if ($finished && ($memory->getLevel() == 12 || $memory->getMode == 'one') {
+		if ($finished && ($memory->getLevel() == 12 || $memory->getMode() == 'one')) {
 			// Si utilisateur connecté
+			if (isset($user)) {
+				Wof::insert_wof($memory->getTime(), $memory->getLevel(), $memory->getDate()->format('Y-m-d'), $memory->getTurn(), $user->getId());
+			}
 				// On ajoute la partie à la base
 
 			// Suppression de la partie
@@ -113,6 +120,8 @@
 						<h1>Bravo!</h1><br>
 						<h2>Votre temps : <?php echo round ($memory->getTime(), 2) ?> secondes</h2><br>
 						<h2>Nombre de coups : <?php echo $memory->getTurn(); ?></h2>
+						<div><button class='btn btn-primary button_memory' name='wof' type='submit' value='1'>Voir mon classement</button></div>
+						<div><button class='btn btn-primary button_memory' name='other' type='submit' value='1'>Autre niveau</button></div>
 					</div>
 				<?php endif; ?>
 
