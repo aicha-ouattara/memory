@@ -494,3 +494,38 @@ label {
     text-decoration: underline;
     color: green;
 }
+
+
+/* CHOICE LEVEL */
+
+.level a {
+    font-size: 3em;
+    font-family: 'Luckiest Guy', cursive;
+    background-color: #00000098;
+    color: white;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.level a:hover {
+    text-decoration: none;
+    background-color: #f5384a;
+    color: black;
+}
+
+.level {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.title_level {
+    font-size: 2em;
+    font-family: 'Luckiest Guy', cursive;
+    color: white;
+}
+
+.main_level {
+    margin-top: 10%;
+    margin-bottom: 12%;
+}
