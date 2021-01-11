@@ -33,7 +33,6 @@ session_start();
 
 <div class="container">
 	<article class="level"> 
-
 	<a href="memory.php?level=3&mode=one">3</a> 
 	<a href="memory.php?level=4&mode=one">4</a>
 	<a href="memory.php?level=5&mode=one">5</a>
@@ -43,9 +42,12 @@ session_start();
 	<a href="memory.php?level=9&mode=one">9</a>
 	<a href="memory.php?level=10&mode=one">10</a>
 	<a href="memory.php?level=11&mode=one">11</a>
-	<a href="memory.php?level=12&mode=one">12</a>
-
+	<a href="memory.php?level=12&mode=one">12</a><br>
 	</article>
+</div>
+
+<div class="chelem container">
+<a href="memory.php?level=3&mode=chelem" class="bigchelem">Grand chelem</a>
 </div>
 
 </main>

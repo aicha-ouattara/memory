@@ -18,9 +18,6 @@ $req = $bd->prepare("SELECT utilisateurs.login as Pseudo,  games.datetime as Dat
 $req->execute();
 
 
-
-
-
 ?>
 
 <!DOCTYPE html>

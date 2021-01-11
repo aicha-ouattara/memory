@@ -505,12 +505,14 @@ label {
     color: white;
     padding-left: 2%;
     padding-right: 2%;
+    transition: 0.6s;
 }
 
 .level a:hover {
     text-decoration: none;
     background-color: #f5384a;
     color: black;
+    box-shadow: 0px 0px 24px 11px rgba(0, 0, 0, 0.75);
 }
 
 .level {
@@ -526,6 +528,28 @@ label {
 }
 
 .main_level {
-    margin-top: 10%;
+    margin-top: 5%;
     margin-bottom: 12%;
+}
+
+.bigchelem {
+    font-size: 2.5em;
+    font-family: 'Luckiest Guy', cursive;
+    background-color: #00000098;
+    color: white;
+    padding-left: 2%;
+    padding-right: 2%;
+    transition: 0.6s;
+}
+
+.bigchelem:hover {
+    text-decoration: none;
+    background-color: #f5384a;
+    color: black;
+    box-shadow: 0px 0px 24px 11px rgba(0, 0, 0, 0.75);
+}
+
+.chelem {
+    margin-top: 2%;
+    text-align: center;
 }
