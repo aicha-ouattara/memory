@@ -42,7 +42,7 @@ class Wof
     public static function users_progress($id)
     {
         $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-        $req = $db->prepare("SELECT time as temps, score, grille as pairs , datetime as date FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = ? ORDER BY games.time desc LIMIT 3");
+        $req = $db->prepare("SELECT time as temps, score, grille as pairs, datetime as date FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = ? ORDER BY games.time desc LIMIT 3");
         $req->execute([$id]);
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
         $bdd = NULL;
