@@ -50,21 +50,19 @@ nav a:hover {
 }
 .detail-button a
 {
-    font-size: 20px;
+    font-size: 50px;
     font-family: 'Luckiest Guy', cursive;
-    color: #ffe817;
+    color: white;
     display: block;
     margin-right: auto;
     margin-left: auto;
-    width: 4%;
+    width: 33%;
 }
 
 
 .detail-button a:hover
 {
-    -webkit-transform: scale(1.9);
-    -ms-transform: scale(1.9);
-    transform: scale(1.9);
+    color: coral;
 }
 .retour-button
 {

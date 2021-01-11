@@ -29,7 +29,7 @@ class Wof
     public function users_progress_score($id)  //$grid ou $id ?
     {
         $bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-        $req= $bdd->prepare("SELECT * FROM games WHERE id_utilisateur = ? ORDER BY games.score DESC LIMIT 3");
+        $req= $bdd->prepare("SELECT time as temps, score, grille as pairs , datetime as date  FROM games WHERE id_utilisateur = ? ORDER BY games.score DESC LIMIT 3");
         $req->execute([$id]);
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
         $bdd = NULL;
@@ -39,7 +39,7 @@ class Wof
     public function users_progress($id)
     {
         $bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-        $req = $bdd->prepare("SELECT avatar, login, time as temps, score, grille, datetime as date FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = ? ORDER BY games.time desc LIMIT 3");
+        $req = $bdd->prepare("SELECT time as temps, score, grille as pairs , datetime as date FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = ? ORDER BY games.time desc LIMIT 3");
         $req->execute([$id]);
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
         $bdd = NULL;

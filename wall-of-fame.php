@@ -44,7 +44,6 @@ $req->execute();
                 <tr>
                     <th>Classement</th>
                 </tr>
-
                 <?php
                 for ($i = 1; $i <= 10; $i++) {
                     echo "<tr>";

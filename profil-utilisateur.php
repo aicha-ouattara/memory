@@ -61,12 +61,12 @@ $req->execute();
 
     <article class="detail-button">
       <img class="retour-button" src="images/retour.png">
-        <a href="memory.php">Retour</a>
+        <a href="profil_update.php">Modifie ton profil</a>
     </article>
 
     <h3 class="best-user-score"> Ta progression</h3>
 
-    <<article class="table_class">
+    <article class="table_class">
         <?php
         $i = 0;
 
