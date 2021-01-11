@@ -128,6 +128,11 @@
 			}
 		}
 
+		public function getLevel()
+		{
+			return $this->level;
+		}
+
 		public function restart()
 		{
 			if ($this->mode == 'chelem') {
