@@ -1,6 +1,6 @@
 <?php
 	include 'Card.php';
-
+	include 'Wof.php';
 
 	// Demarrage session
 	session_start();
@@ -10,15 +10,21 @@
 				///////// Initialisation partie //////////
 
 	// Si memory dans la session
-	if (isset($_SESSION['grid'])) {
+	if (isset($_SESSION['grid']) && $_SESSION['grid'] != Null) {
 		// Récupération de la partie débutée ou en cours
 		$memory = $_SESSION['grid'];
 	}
 	// Sinon on génère une nouvelle grille avec le get
 	else {
 		if (isset($_GET['level']) && isset($_GET['mode'])) {
-			$_SESSION['grid'] = new Memory(3, $_GET['level'], $_GET['mode']);
+			$_SESSION['grid'] = new Memory($_GET['level'], $_GET['mode']);
 			$memory = $_SESSION['grid'];
+			$memory->beginGame();
+		}
+		else {
+			$_SESSION['grid'] = new Memory(3, 'one');
+			$memory = $_SESSION['grid'];
+			$memory->beginGame();
 		}
 	}
 
@@ -26,12 +32,7 @@
 
 	// Si le user veut rejouer la partie
 	if (isset($_POST['restart'])) {
-		$_SESSION['grid'] = Null;
-		if (isset($_SESSION['mode']) && $_SESSION['mode'] == 'chelem') {
-			header('Location: ?level=3&mode=chelem');
-		}else {
-			header('Location: ?level='.$_SESSION['level']);
-		}
+		$memory->restart();
 	}
 
 	// Si le user a gagné -> retour au menu principal
@@ -42,9 +43,9 @@
 
 	// Si le user a gagné et est dans un grand chelem
 	// On passe au niveau suivant en automatique
-	if (isset($_POST['next']) && isset($_SESSION['mode']) && $_SESSION['mode'] == 'chelem') {
-		$_SESSION['grid'] = Null;
-		header('Location: ?level='.($_SESSION['level']+1));
+	if (isset($_POST['next']) && $memory->getMode() == 'chelem') {
+		//$_SESSION['grid'] = Null;
+		$memory->nextLevel();
 	}
 
 				////////// Update de la partie ///////////
@@ -59,37 +60,16 @@
 		$score = $memory->getScore();
 
 		// Vérif si grille terminée
-		if ($finished) {
+		if ($finished && ($memory->getLevel() == 12 || $memory->getMode == 'one') {
 			// Si utilisateur connecté
 				// On ajoute la partie à la base
 
 			// Suppression de la partie
-			$_SESSION['grid'] = Null;
+			//$_SESSION['grid'] = Null;
 
 			// Redirection sur le wall of fame
 		}
 	}
-
-
-
-	echo "<pre>";
-	if (isset($turn)) {
-		echo 'Tour : '.$turn.'</br>';
-	}
-	if (isset($time)) {
-		echo 'Temps : '.$time.'</br>';
-	}
-	if (isset($score)) {
-		echo 'Score : '.$score.'</br>';
-	}
-
-
-	//echo "Post :";
-	//var_dump($_POST);
-	//echo "Session :";
-	//var_dump($_SESSION);
-	echo "</pre>";
-
 
 ?>
 
@@ -100,15 +80,17 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<base href="/">
+	<!-- <base href="/"> -->
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" type="text/css" href="memory/memory.css">
+	<link rel="stylesheet" type="text/css" href="css/memory.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 	<title>Play !</title>
 </head>
 <body>
-	<form action="memory/#" method="post">
+	<?php include "includes/header.php"; ?>
+	<form action="memory.php" method="post">
 
 		<div class="container">
 
@@ -125,20 +107,22 @@
 			<?php endforeach; ?>
 			</div>
 
-			<div class="row justify-content-center">
+			<div class="menu_memory">
 				<?php if (isset($finished) && $finished): ?>
-					<h1>Bravo!</h1>
-					<h2>Partie terminée</h2>
-					<?php if (isset($_SESSION['mode']) && $_SESSION['mode'] == 'chelem'): ?>
-						<div class="col"><button class='btn btn-primary' name='next' type='submit' value='1'>Niveau suivant</button></div>
-					<?php else: ?>
-						<div class="col"><button class='btn btn-primary' name='menu' type='submit' value='1'>Retourner au menu</button></div>
-					<?php endif; ?>
-				<?php else: ?>
-					<div class="col"><button class='btn btn-primary' name='restart' type='submit' value='1'>Rejouer</button></div>
+					<div class="finished">
+						<h1>Bravo!</h1><br>
+						<h2>Votre temps : <?php echo round ($memory->getTime(), 2) ?> secondes</h2><br>
+						<h2>Nombre de coups : <?php echo $memory->getTurn(); ?></h2>
+					</div>
 				<?php endif; ?>
-			</div>
 
+				<?php if ($memory->getMode() == 'chelem'): ?>
+					<div class="button_memory"><button class='btn btn-primary' name='next' type='submit' value='1'>Niveau suivant</button></div>
+				<?php endif; ?>
+
+				<div><button class='btn btn-primary button_memory' name='restart' type='submit' value='1'>Rejouer</button></div>
+				<div><button class='btn btn-primary button_memory' name='menu' type='submit' value='1'>Menu principal</button></div>
+			</div>
 		</div>
 	</form>
 
@@ -148,5 +132,6 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<?php include "includes/footer.php"; ?>
 </body>
 </html>

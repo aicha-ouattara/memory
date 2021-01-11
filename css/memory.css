@@ -1,0 +1,118 @@
+.btn{
+	height: 100px;
+	width: 100px;
+
+}
+.hidden{
+	background-image: url('../img/dos_carte.jpg') !important;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.A{
+	background-image: url('../img/1.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.B{
+	background-image: url('../img/2.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.C{
+	background-image: url('../img/3.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.D{
+	background-image: url('../img/4.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.E{
+	background-image: url('../img/184a994e882ffe3555ac7f06a3acef1e - Copie (2).png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.F{
+	background-image: url('../img/184a994e882ffe3555ac7f06a3acef1e - Copie (3).png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.G{
+	background-image: url('../img/184a994e882ffe3555ac7f06a3acef1e - Copie (5).png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.H{
+	background-image: url('../img/184a994e882ffe3555ac7f06a3acef1e - Copie.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.I{
+	background-image: url('../img/a33b296eb4e9b4d7a4e914b90e1f93ed - Copie (3).png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.J{
+	background-image: url('../img/a33b296eb4e9b4d7a4e914b90e1f93ed - Copie (4).png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.K{
+	background-image: url('../img/a33b296eb4e9b4d7a4e914b90e1f93ed - Copie (5).png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.L{
+	background-image: url('../img/a33b296eb4e9b4d7a4e914b90e1f93ed - Copie (6).png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+
+
+.menu_memory{
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.finished{
+	margin-top: 20px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.button_memory{
+	margin-top: 10px;
+	width : 200px;
+}

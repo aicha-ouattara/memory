@@ -72,11 +72,14 @@
 		private $score;		// Score
 		private $date; 		// Sauvegarde datetime début de partie
 		private $mode;		// Mode de jeu INVITE / CHELEM
+		private $level;
 
-		function __construct($nb_paires = 3, $level, $mode)
+		function __construct($nb_paires = 3, $mode)
 		{
 			// Enregistrement du mode
 			$this->mode = $mode;
+			// Enregistrement level
+			$this->level = $nb_paires;
 			// Création de la grille
 			$this->grid = $this->createGrid($nb_paires);
 			// Sauvegarde du nombre de cartes dans le jeu
@@ -110,6 +113,37 @@
 			shuffle($memory);
 			// retour de la grille
 			return $memory;
+		}
+
+		public function nextLevel()
+		{
+			if ($this->level < 12) {
+				//$this->nb_paires += 1;
+				$this->level += 1;
+				$this->nb_cards = $this->level * 2;
+				$this->grid = $this->createGrid($this->level);
+				return true;
+			}else {
+				return false;
+			}
+		}
+
+		public function getLevel()
+		{
+			return $this->level;
+		}
+
+		public function restart()
+		{
+			if ($this->mode == 'chelem') {
+				$this->grid = $this->createGrid(3);
+			}
+			$this->grid = $this->createGrid($this->level);
+		}
+
+		public function getMode()
+		{
+			return $this->mode;
 		}
 
 		public function beginGame()

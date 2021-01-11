@@ -3,6 +3,10 @@ require_once 'class/user.php';
 
 session_start();
 
+if (isset($_SESSION['grid']) && $_SESSION['grid'] != Null) {
+	$_SESSION['grid'] = Null;
+}
+
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
 }

@@ -12,7 +12,7 @@ if (isset($_SESSION['user'])) {
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="index.php">Accueil </a>
-      <a class="nav-item nav-link" href="memory.php">Jouer</a>
+      <a class="nav-item nav-link" href="level_choice.php">Jouer</a>
 
       <?php
       if (isset($_SESSION['user'])) { ?>
