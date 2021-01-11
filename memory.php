@@ -10,14 +10,14 @@
 				///////// Initialisation partie //////////
 
 	// Si memory dans la session
-	if (isset($_SESSION['grid'])) {
+	if (isset($_SESSION['grid']) && $_SESSION['grid'] != Null) {
 		// Récupération de la partie débutée ou en cours
 		$memory = $_SESSION['grid'];
 	}
 	// Sinon on génère une nouvelle grille avec le get
 	else {
 		if (isset($_GET['level']) && isset($_GET['mode'])) {
-			$_SESSION['grid'] = new Memory(3, $_GET['level'], $_GET['mode']);
+			$_SESSION['grid'] = new Memory($_GET['level'], $_GET['mode']);
 			$memory = $_SESSION['grid'];
 		}
 	}
@@ -26,11 +26,13 @@
 
 	// Si le user veut rejouer la partie
 	if (isset($_POST['restart'])) {
-		$_SESSION['grid'] = Null;
-		if (isset($_SESSION['mode']) && $_SESSION['mode'] == 'chelem') {
-			header('Location: ?level=3&mode=chelem');
-		}else {
-			header('Location: ?level='.$_SESSION['level']);
+		if ($memory->getMode() == 'chelem') {
+			$_SESSION['grid'] = Null;
+			header('Location: memory.php?level=3&mode=chelem');
+		}
+		if ($memory->getMode() == 'one') {
+			$_SESSION['grid'] = Null;
+			header('Location: memory.php?level='.$memory->getLevel());
 		}
 	}
 
@@ -42,9 +44,9 @@
 
 	// Si le user a gagné et est dans un grand chelem
 	// On passe au niveau suivant en automatique
-	if (isset($_POST['next']) && isset($_SESSION['mode']) && $_SESSION['mode'] == 'chelem') {
+	if (isset($_POST['next']) && $memory->getMode() == 'chelem') {
 		$_SESSION['grid'] = Null;
-		header('Location: ?level='.($_SESSION['level']+1));
+		header('Location: memory.php?level='.($memory->getLevel()+1));
 	}
 
 				////////// Update de la partie ///////////
@@ -100,7 +102,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<base href="/">
+	<!-- <base href="/"> -->
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" type="text/css" href="memory/memory.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
