@@ -16,7 +16,7 @@ if (isset($_SESSION['user'])) {
 
       <?php
       if (isset($_SESSION['user'])) { ?>
-        <a class="nav-item nav-link" href="profil.php">Profil</a>
+        <a class="nav-item nav-link" href="profil-utilisateur.php">Profil</a>
         <a class="nav-item nav-link" href="deconnexion.php">Déconnexion</a>
       <?php } else { ?>
         <a class="nav-item nav-link" href="inscription.php">Inscription</a>

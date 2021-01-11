@@ -72,14 +72,11 @@
 		private $score;		// Score
 		private $date; 		// Sauvegarde datetime début de partie
 		private $mode;		// Mode de jeu INVITE / CHELEM
-		private $level;		// Niveau de jeu
 
-		function __construct($nb_paires = 3, $mode)
+		function __construct($nb_paires = 3, $level, $mode)
 		{
 			// Enregistrement du mode
 			$this->mode = $mode;
-			// Enregistrement du Niveau
-			$this->level = $nb_paires;
 			// Création de la grille
 			$this->grid = $this->createGrid($nb_paires);
 			// Sauvegarde du nombre de cartes dans le jeu
@@ -140,16 +137,6 @@
 		public function getScore()
 		{
 			return $this->score;
-		}
-
-		public function getMode()
-		{
-			return $this->mode;
-		}
-
-		public function getLevel()
-		{
-			return $this->level;
 		}
 
 		public function win()

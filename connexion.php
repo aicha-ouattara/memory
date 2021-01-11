@@ -1,7 +1,7 @@
 <?php
-session_start();
-
 require_once 'class/user.php';
+
+session_start();
 
 $user = new user;
 
@@ -20,7 +20,7 @@ $user = new user;
     <title>Connexion</title>
 </head>
 
-<body>
+<body class="body-connexion">
 
     <header>
         <?php include("includes/header.php"); ?>
@@ -40,6 +40,7 @@ $user = new user;
                     if (isset($_POST['submit'])) {
                         $user->connect($_POST['login'], $_POST['password']);
                         $_SESSION['user'] = $user;
+                        header("location: profil-utilisateur.php");
                     }
 
                     ?>
@@ -47,15 +48,8 @@ $user = new user;
             </div>
           
             <div class="col-5 ">
-          
-                    
-           
-           
                 <div class="container">
-         
-
-                   
-
+        
                     <form action="connexion.php" method="POST">
                         <div class="form-group">
                             <label>Pseudo</label>
