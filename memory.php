@@ -9,37 +9,26 @@
 
 				///////// Initialisation partie //////////
 
-	// Si début de partie, utiliser le GET (level) pour créer la grille
-	if (isset($_GET['level']) && !isset($_SESSION['grid'])) {
-		// enregistrement du niveau
-		$_SESSION['level'] = $_GET['level'];
-		// Si information de mode de jeu -> chelem
-		if (isset($_GET['mode']) && $_GET['mode'] == 'chelem') {
-			// enregistrement chelem
-			$_SESSION['mode'] = 'chelem';
-			// Protection contre accès à un autre level
-			$_SESSION['grid'] = new Memory(3);
-		}
-
-		// Sinon on joue le niveau demandé
-		else {
-			$_SESSION['grid'] = new Memory($_GET['level']);
-		}
-		// Début chrono
-		$_SESSION['grid']->beginGame();
+	// Si memory dans la session
+	if (isset($_SESSION['grid'])) {
+		// Récupération de la partie débutée ou en cours
+		$memory = $_SESSION['grid'];
 	}
-
-	// Récupération de la partie débutée ou en cours
-	$memory = $_SESSION['grid'];
-
+	// Sinon on génère une nouvelle grille avec le get
+	else {
+		if (isset($_GET['level']) && isset($_GET['mode'])) {
+			$_SESSION['grid'] = new Memory(3, $_GET['level'], $_GET['mode']);
+			$memory = $_SESSION['grid'];
+		}
+	}
 
 				////////// Options de partie ///////
 
 	// Si le user veut rejouer la partie
 	if (isset($_POST['restart'])) {
-		session_destroy();
+		$_SESSION['grid'] = Null;
 		if (isset($_SESSION['mode']) && $_SESSION['mode'] == 'chelem') {
-			header('Location: ?level=3');
+			header('Location: ?level=3&mode=chelem');
 		}else {
 			header('Location: ?level='.$_SESSION['level']);
 		}
@@ -47,7 +36,7 @@
 
 	// Si le user a gagné -> retour au menu principal
 	if (isset($_POST['menu'])) {
-		session_destroy();
+		$_SESSION['grid'] = Null;
 		header('Location: index.php');
 	}
 
@@ -113,42 +102,18 @@
 
 	<base href="/">
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" type="text/css" href="memory/master.css">
+	<link rel="stylesheet" type="text/css" href="memory/memory.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 	<title>Play !</title>
 </head>
 <body>
 	<form action="memory/#" method="post">
-		<?php
-		if (isset($finished) && $finished) {
-			echo "Bravo !";
-			if (isset($_SESSION['mode']) && $_SESSION['mode'] == 'chelem') {
-				echo "<button class='btn btn-primary' name='next' type='submit' value='1'>Niveau suivant</button>";
-			}
-			else {
-				echo "<button class='btn btn-primary' name='menu' type='submit' value='1'>Retourner au menu</button>";
-			}
 
-		}
-		else {
-			$memory->printMemory();
-			echo "<button class='btn btn-primary' name='restart' type='submit' value='1'>Rejouer</button>";
-		}
-		?>
 		<div class="container">
+
+			<div class="row">
 			<?php foreach ($memory->getGrid() as $key => $card): ?>
-
-				<?php if ($key % 3 == 0 && $key != 0): ?>
-					</div>
-				<?php endif; ?>
-
-				<?php if ($key % 3 == 0): ?>
-					<div class="row">
-				<?php endif; ?>
-
-
-
 				<?php if ($card->flip && $card->validated): ?>
 					<div class="col"><button class='btn btn-primary <?php echo $card->value ?>' name='card' type='submit' value='<?php echo $key ?>' disabled></button></div>
 				<?php elseif ($card->flip && !$card->validated): ?>
@@ -157,14 +122,24 @@
 					<div class="col"><button class='btn btn-primary hidden' name='card' type='submit' value="<?php echo $key ?>"></button></div>
 				<?php endif; ?>
 
-
-
-
-
-
 			<?php endforeach; ?>
-		</div>
+			</div>
 
+			<div class="row justify-content-center">
+				<?php if (isset($finished) && $finished): ?>
+					<h1>Bravo!</h1>
+					<h2>Partie terminée</h2>
+					<?php if (isset($_SESSION['mode']) && $_SESSION['mode'] == 'chelem'): ?>
+						<div class="col"><button class='btn btn-primary' name='next' type='submit' value='1'>Niveau suivant</button></div>
+					<?php else: ?>
+						<div class="col"><button class='btn btn-primary' name='menu' type='submit' value='1'>Retourner au menu</button></div>
+					<?php endif; ?>
+				<?php else: ?>
+					<div class="col"><button class='btn btn-primary' name='restart' type='submit' value='1'>Rejouer</button></div>
+				<?php endif; ?>
+			</div>
+
+		</div>
 	</form>
 
 
