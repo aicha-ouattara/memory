@@ -93,3 +93,26 @@
 	background-repeat: no-repeat;
 	background-position: center;
 }
+
+
+
+.menu_memory{
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.finished{
+	margin-top: 20px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.button_memory{
+	margin-top: 10px;
+	width : 200px;
+}

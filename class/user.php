@@ -23,7 +23,7 @@ class user
             $errors[] = "Tous les champs doivent être remplis.";
         }
 
-        //Verification caractère login 
+        //Verification caractère login
         $login_required = preg_match("/^(?=.*[A-Za-z]$)[A-Za-z][A-Za-z\-]{2,19}$/", $login);
         if (!$login_required) {
             $errors[] = "Le login doit comporter entre 3 et 19 caractères et ne doit contenir aucun caractère spécial (excepté -).";
@@ -54,12 +54,12 @@ class user
         if (empty($errors)) {
             $insertDatabase = $db->prepare("INSERT INTO utilisateurs(login, password, avatar) VALUES(?, ?, ?)");
             $insertDatabase->execute(array($login, $passwordHash, $avatar));?>
-        
+
             <div class="alert alert-success" role="alert">Bravo vous êtes officiellement un petit monstre !</div>
             <a href="connexion.php">Connexion à ton compte</a>
-            <img src="https://media.giphy.com/media/27bK4xfPEEOvAheEgX/giphy.gif" alt="gifmonster" class="gifmonster">  
-       <?php  
-             
+            <img src="https://media.giphy.com/media/27bK4xfPEEOvAheEgX/giphy.gif" alt="gifmonster" class="gifmonster">
+       <?php
+
         } else {
             $message = new messages($errors);
             echo $message->renderMessage();
@@ -130,7 +130,7 @@ class user
             $errors[] = "Tous les champs doivent être remplis.";
         }
 
-        //Verification caractère login 
+        //Verification caractère login
         $login_required = preg_match("/^(?=.*[A-Za-z]$)[A-Za-z][A-Za-z\-]{2,19}$/", $login);
         if (!$login_required) {
             $errors[] = "Le login doit comporter entre 3 et 19 caractères et ne doit contenir aucun caractère spécial (excepté -).";

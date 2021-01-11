@@ -128,6 +128,11 @@
 			}
 		}
 
+		public function getLevel()
+		{
+			return $this->level;
+		}
+
 		public function restart()
 		{
 			if ($this->mode == 'chelem') {
@@ -156,6 +161,11 @@
 			$now = microtime(true);
 			$this->time = $now - $this->beginTime;
 			return $this->time;
+		}
+
+		public function getDate()
+		{
+			return $this->date;
 		}
 
 		public function getTurn()

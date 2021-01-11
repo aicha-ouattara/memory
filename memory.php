@@ -1,10 +1,14 @@
 <?php
 	include 'Card.php';
-
+	include 'Wof.php';
+	include 'class/user.php';
 
 	// Demarrage session
 	session_start();
 	//session_destroy();
+	if (isset($_SESSION['user'])) {
+		$user = $_SESSION['user'];
+	}
 
 
 				///////// Initialisation partie //////////
@@ -60,8 +64,11 @@
 		$score = $memory->getScore();
 
 		// Vérif si grille terminée
-		if ($finished) {
+		if ($finished && ($memory->getLevel() == 12 || $memory->getMode() == 'one')) {
 			// Si utilisateur connecté
+			if (isset($user)) {
+				Wof::insert_wof($memory->getTime(), $memory->getLevel(), $memory->getDate()->format('Y-m-d'), $memory->getTurn(), $user->getId());
+			}
 				// On ajoute la partie à la base
 
 			// Suppression de la partie
@@ -70,27 +77,6 @@
 			// Redirection sur le wall of fame
 		}
 	}
-
-
-	//
-	// echo "<pre>";
-	// if (isset($turn)) {
-	// 	echo 'Tour : '.$turn.'</br>';
-	// }
-	// if (isset($time)) {
-	// 	echo 'Temps : '.$time.'</br>';
-	// }
-	// if (isset($score)) {
-	// 	echo 'Score : '.$score.'</br>';
-	// }
-	//
-	//
-	// echo "memory :";
-	// //var_dump($memory->getGrid());
-	// //echo "Session :";
-	// //var_dump($_SESSION);
-	// echo "</pre>";
-
 
 ?>
 
@@ -128,20 +114,24 @@
 			<?php endforeach; ?>
 			</div>
 
-			<div class="d-flex justify-content-center">
+			<div class="menu_memory">
 				<?php if (isset($finished) && $finished): ?>
-					<h1>Bravo!</h1>
-					<h2>Partie terminée</h2>
-					<?php if ($memory->getMode() == 'chelem'): ?>
-						<div class="col"><button class='btn btn-primary' name='next' type='submit' value='1'>Niveau suivant</button></div>
-					<?php else: ?>
-						<div class="col"><button class='btn btn-primary' name='menu' type='submit' value='1'>Retourner au menu</button></div>
-					<?php endif; ?>
-				<?php else: ?>
-					<div class="col"><button class='btn btn-primary' name='restart' type='submit' value='1'>Rejouer</button></div>
+					<div class="finished">
+						<h1>Bravo!</h1><br>
+						<h2>Votre temps : <?php echo round ($memory->getTime(), 2) ?> secondes</h2><br>
+						<h2>Nombre de coups : <?php echo $memory->getTurn(); ?></h2>
+						<div><button class='btn btn-primary button_memory' name='wof' type='submit' value='1'>Voir mon classement</button></div>
+						<div><button class='btn btn-primary button_memory' name='other' type='submit' value='1'>Autre niveau</button></div>
+					</div>
 				<?php endif; ?>
-			</div>
 
+				<?php if ($memory->getMode() == 'chelem'): ?>
+					<div class="button_memory"><button class='btn btn-primary' name='next' type='submit' value='1'>Niveau suivant</button></div>
+				<?php endif; ?>
+
+				<div><button class='btn btn-primary button_memory' name='restart' type='submit' value='1'>Rejouer</button></div>
+				<div><button class='btn btn-primary button_memory' name='menu' type='submit' value='1'>Menu principal</button></div>
+			</div>
 		</div>
 	</form>
 

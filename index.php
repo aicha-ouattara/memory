@@ -45,7 +45,7 @@ $req->execute();
             <div><img src="img/monsterred.png" class="monster"></div>
             <div>
                 <h1>MONSTER MEMORY</h1>
-                <a href="memory.php">
+                <a href="level_choice.php">
                     <h4 class="button_play">JOUER !</h4>
                 </a>
             </div>
