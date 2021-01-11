@@ -71,13 +71,12 @@
 		private $time;		// Temps écoulé
 		private $score;		// Score
 		private $date; 		// Sauvegarde datetime début de partie
-		private $row_len;	// Pour affichae
-		//private $mode;
+		private $mode;		// Mode de jeu INVITE / CHELEM
 
-
-
-		function __construct($nb_paires = 3)
+		function __construct($nb_paires = 3, $level, $mode)
 		{
+			// Enregistrement du mode
+			$this->mode = $mode;
 			// Création de la grille
 			$this->grid = $this->createGrid($nb_paires);
 			// Sauvegarde du nombre de cartes dans le jeu
@@ -90,6 +89,7 @@
 			$this->beginTime = Null;
 			// Sauvegarde DateTime de création de la partie
 			$this->date = new DateTime();
+
 		}
 
 		public function createGrid($nb_paires)
@@ -141,12 +141,12 @@
 
 		public function win()
 		{
-			$this->score+= $this->turn / $this->getTime();
+			$this->score += (100 / $this->getTime());
 		}
 
 		public function lose()
 		{
-			$this->score-= $this->turn / $this->getTime();
+			//$this->score-= $this->turn / $this->getTime();
 		}
 
 		public function printMemory()
