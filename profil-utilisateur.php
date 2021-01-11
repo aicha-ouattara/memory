@@ -11,7 +11,7 @@ if (isset($_SESSION['user'])) {
 
 $bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
 
-$req = $bdd->prepare("SELECT login, time, score, grille, datetime as date  FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = utilisateurs.id");
+$req = $bdd->prepare("SELECT login, time, score, grille, datetime as date  FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = utilisateurs.id limit 3");
 $req->execute();
 
 $id = $user->getId();
