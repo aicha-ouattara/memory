@@ -3,10 +3,6 @@ require_once 'wof.php';
 require_once 'class/user.php';
 session_start(); //Session connexion
 
-$bdd =new PDO("mysql:host=localhost;dbname=memory","root","");
-
-$req = $bdd->prepare( "SELECT avatar, login, time, score, grille, datetime as date FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = utilisateurs.id" );
-$req->execute();
 
 function print_users_progress_score($tab)
 {
@@ -96,9 +92,6 @@ if (isset($_POST['nb_paires'])) {
 		print_users_progress_score($tab);
 	}
 }
-
-
-
 	?>
 
     <div class="play">
@@ -107,8 +100,6 @@ if (isset($_POST['nb_paires'])) {
         </a>
         <a href="#begin"><img src="img/arrowred.png" class="arrowred"></a>
     </div>
-
-
 
 </main>
 <footer>

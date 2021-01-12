@@ -4,12 +4,6 @@ require_once 'class/user.php';
 
 session_start(); //Session connexion
 
-//$card = new Card;
-//$wof = new Wof;
-//var_dump($wof);
-//$user = new User;
-
-
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
 }
@@ -60,8 +54,6 @@ function print_users_progress($tab2)
 	}
 	echo "</div></table>";
 }
-
-
 
 ?>
 
@@ -146,13 +138,6 @@ function print_users_progress($tab2)
             echo "</div></table>";
             ?>
 
-
-			?>
-
-        </article>
-
-
-
         <div class="play">
             <a href="memory.php">
                 <br>
@@ -160,7 +145,6 @@ function print_users_progress($tab2)
             </a>
             <a href="#begin"><img src="img/arrowred.png" class="arrowred"></a>
         </div>
-
 
     </main>
     <footer>
