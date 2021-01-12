@@ -7,9 +7,6 @@ session_start(); //Session connexion
 //var_dump($wof);
 //$user = new User;
 
-echo "<pre>";
-var_dump($_POST);
-echo "</pre>";
 
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
