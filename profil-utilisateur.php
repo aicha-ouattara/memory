@@ -1,8 +1,10 @@
 <?php
 require_once 'Wof.php';
 require_once 'class/user.php';
+
 session_start(); //Session connexion
 
+//$card = new Card;
 //$wof = new Wof;
 //var_dump($wof);
 //$user = new User;
@@ -82,53 +84,60 @@ foreach ($result as $value) {
                 </table>
             </div>
             <?php
+            $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
+            $req= $db->prepare("SELECT time as temps, score as nb_coup, grille as pairs , datetime as date  FROM games WHERE id_utilisateur = ? ORDER BY games.score asc limit 3");
+            $req->execute([$id]);
+
+            $i = 0;
             echo "<div class=\"div_data\" ><table class=\"table_data\">";
-            $tab = Wof::users_progress_score($id);
-
-            foreach ($tab as $key => $value) {
-            	echo "<th class=\"key\">$key</th>";
-            }
-
+            while ($result = $req->fetch(PDO::FETCH_ASSOC)) {
+                if ($i == 0) {
+                    foreach ($result as $key => $value) {
+                        echo "<th class=\"key\">$key</th>";
+                    }
+                    $i++;
+                }
                 echo "<tr>";
-                foreach ($tab as  $value) {
+                foreach ($result as $key => $value) {
                     echo "<td>" . $value . "</td>";
                 }
                 echo "</tr>";
+            }
+
             echo "</div></table>";
             ?>
 
         </article>
 
 
-        <h3 class="best-user-score"> Ta progression</h3>
+        <h3 class="best-user-score"> Ta progression par temps</h3>
 
         <article class="table_class">
             <?php
-       echo "<div class=\"div_data\" ><table class=\"table_data\">";
-       $tab2 = Wof::users_progress($id);
+            $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
+            $req= $db->prepare("SELECT time as temps, score as nb_coup, grille as pairs , datetime as date  FROM games WHERE id_utilisateur = ? ORDER BY games.time asc limit 3");
+            $req->execute([$id]);
 
-		foreach ($tab2 as $key => $value) {
+            $i = 0;
 
-			if ($key == 0) {
-				foreach ($value as $col) {
-					echo "<th class=\"key\">$col</th>";
-				}
-			}else {
-				foreach ($value as $col) {
-					echo "<td>" . $col . "</td>";
-				}
-			}
-			echo "</tr>";
-		}
+            echo "<div class=\"div_data\" ><table class=\"table_data\">";
+            while ($result = $req->fetch(PDO::FETCH_ASSOC)) {
+                if ($i == 0) {
+                    foreach ($result as $key => $value) {
+                        echo "<th class=\"key\">$key</th>";
+                    }
+                    $i++;
+                }
+                echo "<tr>";
+                foreach ($result as $key => $value) {
+                    echo "<td>" . $value . "</td>";
+                }
+                echo "</tr>";
+            }
 
+            echo "</div></table>";
+            ?>
 
-
-       // echo "<tr>";
-       // foreach ($tab2 as $value) {
-       //     echo "<td>" . $value . "</td>";
-       // }
-       echo "</tr>";
-       echo "</div></table>";?>
 
         </article>
 
@@ -139,6 +148,7 @@ foreach ($result as $value) {
             </a>
             <a href="#begin"><img src="img/arrowred.png" class="arrowred"></a>
         </div>
+
 
     </main>
     <footer>

@@ -32,10 +32,10 @@ class Wof
     public static function users_progress_score($id)  //$grid ou $id ?
     {
         $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-        $req= $db->prepare("SELECT time as temps, score, grille as pairs , datetime as date  FROM games WHERE id_utilisateur = ? ORDER BY games.score ");
+        $req= $db->prepare("SELECT time as temps, score, grille as pairs , datetime as date  FROM games WHERE id_utilisateur = ? ORDER BY games.score desc limit 3");
         $req->execute([$id]);
         $resultat = $req->fetch(PDO::FETCH_ASSOC);
-        $bdd = NULL;
+        $db = NULL;
         return $resultat;
     }
     //Les 3 dernieres parties qui ont été jouer par l'user par temps
@@ -43,9 +43,9 @@ class Wof
     {
         $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
         $req = $db->prepare("SELECT time as temps, score, grille as pairs, datetime as date FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = ? ORDER BY games.time desc LIMIT 3");
-        $req->execute([$id]);
+        $req->execute(array($id));
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
-        $bdd = NULL;
+        $db = NULL;
         return $resultat;
     }
 
@@ -58,7 +58,7 @@ class Wof
         WHERE grille = ? ORDER BY games.time ASC LIMIT 10 ");
         $req->execute([$grid]);
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
-        $bdd = NULL;
+        $db = NULL;
         return $resultat;
     }
 
@@ -70,7 +70,7 @@ class Wof
         WHERE grille = ? ORDER BY games.score ASC LIMIT 10 ");
         $req->execute([$grid]);
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
-        $bdd = NULL;
+        $db = NULL;
         return $resultat;
     }
 
@@ -81,7 +81,7 @@ class Wof
         $req = $db->prepare("SELECT avatar, login, time as temps, score, grille, datetime as date FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = utilisateurs.id ORDER BY games.id desc LIMIT 3");
         $req->execute();
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
-        $bdd = NULL;
+        $db = NULL;
         return $resultat;
     }
 }
@@ -94,11 +94,11 @@ $wof = new Wof();
 //echo "</pre>";
 //
 //echo "<pre>";
-//var_dump($wof->users_progress_score(1));
+//var_dump($wof->users_progress_score(7));
 //echo "</pre>";
 //
 //echo "<pre>";
-//var_dump($wof->users_progress(1));
+//var_dump($wof->users_progress(7));
 //echo "</pre>";
 //
 //echo "<pre>";
