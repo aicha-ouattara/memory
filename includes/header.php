@@ -13,6 +13,7 @@ if (isset($_SESSION['user'])) {
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="index.php">Accueil </a>
       <a class="nav-item nav-link" href="level_choice.php">Jouer</a>
+      <a class="nav-item nav-link" href="wall-of-fame.php">Classement</a>
 
       <?php
       if (isset($_SESSION['user'])) { ?>
