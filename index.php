@@ -80,7 +80,7 @@ $req->execute();
                     <img src="img/bluemonster.png" class="bluemonster">
                 </div>
                 <div class="container_title">
-                    <h2>WALK OF FAME</h2>
+                    <h2>WALL OF FAME</h2>
                     <h3>Le classement des meilleurs petit monstres !</h3>
                 </div>
             </article>

@@ -1,118 +1,222 @@
-.btn{
-	height: 100px;
-	width: 100px;
-
-}
-.hidden{
-	background-image: url('../img/dos_carte.jpg') !important;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
+.main_play {
+    background-color: rgba(58, 34, 80, 0.733);
+    max-height: 200vh;
+    padding-top: 2%;
 }
 
-.A{
-	background-image: url('../img/1.png');
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+.main_play h4 {
+    color: red;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    margin-bottom: 3%;
 }
 
-.B{
-	background-image: url('../img/2.png');
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+.main_play h4 a {
+    color: rgb(70, 190, 59);
 }
 
-.C{
-	background-image: url('../img/3.png');
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+.btn:not(:disabled):not(.disabled) {
+    cursor: url("https://1.bp.blogspot.com/-NmbnDADABUE/XSfhUk_X2yI/AAAAAAAAFFw/5Tp7zt_8erg2AJ-aQ1VhYdH_l4nTReY7wCLcBGAs/s1600/cursor.png"), default;
 }
 
-.D{
-	background-image: url('../img/4.png');
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+.playbtn {
+    background-color: rgba(0, 0, 0, 0.486);
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.6em;
+    border: none;
 }
 
-.E{
-	background-image: url('../img/184a994e882ffe3555ac7f06a3acef1e - Copie (2).png');
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+.playrow button:focus {
+    animation: flip 0.2s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
 }
 
-.F{
-	background-image: url('../img/184a994e882ffe3555ac7f06a3acef1e - Copie (3).png');
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+.playbtn:hover {
+    background-color: rgba(0, 0, 0, 0.623);
 }
 
-.G{
-	background-image: url('../img/184a994e882ffe3555ac7f06a3acef1e - Copie (5).png');
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+@keyframes flip {
+    0% {
+        transform: rotateY(0);
+    }
+    100% {
+        transform: rotateY(180deg);
+    }
 }
 
-.H{
-	background-image: url('../img/184a994e882ffe3555ac7f06a3acef1e - Copie.png');
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+.btn {
+    height: 110px;
+    width: 110px;
+    margin: 3%;
 }
 
-.I{
-	background-image: url('../img/a33b296eb4e9b4d7a4e914b90e1f93ed - Copie (3).png');
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+.btn-primary.disabled,
+.btn-primary:disabled {
+    color: #fff;
+    background-color: #aad45a;
+    border-color: #aad45a;
 }
 
-.J{
-	background-image: url('../img/a33b296eb4e9b4d7a4e914b90e1f93ed - Copie (4).png');
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+.hidden {
+    background-image: url('../img/dos_carte.jpg') !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.K{
-	background-image: url('../img/a33b296eb4e9b4d7a4e914b90e1f93ed - Copie (5).png');
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+.A {
+    background-image: url('../memory-img/A.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.L{
-	background-image: url('../img/a33b296eb4e9b4d7a4e914b90e1f93ed - Copie (6).png');
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+.B {
+    background-image: url('../memory-img/B.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-
-
-.menu_memory{
-	margin-top: 20px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+.C {
+    background-image: url('../memory-img/C.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.finished{
-	margin-top: 20px;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+.D {
+    background-image: url('../memory-img/D.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.button_memory{
-	margin-top: 10px;
-	width : 200px;
+.E {
+    background-image: url('../memory-img/E.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.F {
+    background-image: url('../memory-img/F.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.G {
+    background-image: url('../memory-img/G.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.H {
+    background-image: url('../memory-img/H.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.I {
+    background-image: url('../memory-img/I.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.J {
+    background-image: url('../memory-img/J.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.K {
+    background-image: url('../memory-img/K.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.L {
+    background-image: url('../memory-img/L.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.menu_memory {
+    margin-top: 20px;
+    padding-bottom: 5%;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+}
+
+.finished {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 2%;
+}
+
+.btn_result button {
+    margin-top: 10px;
+    width: 100%;
+    background-color: coral;
+    border: coral;
+    font-family: 'Roboto', sans-serif;
+}
+
+.btn_result button:hover {
+    background-color: rgb(250, 90, 32)
+}
+
+.btn_result2 button {
+    margin-top: 10px;
+    width: 20%;
+    height: 20%;
+    padding: 1%;
+    background-color: coral;
+    border: coral;
+    font-family: 'Roboto', sans-serif;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn_result2 button:hover {
+    background-color: rgb(250, 90, 32)
+}
+
+.result {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.result h2 {
+    font-weight: bold;
+}
+
+.button_memory2 {
+    margin-top: 10px;
+    width: 20%;
+    height: 80%;
+    padding: 1%;
+    background-color: coral;
+    border: coral;
+    font-family: 'Roboto', sans-serif;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button_memory2:hover {
+    background-color: rgb(250, 90, 32)
 }

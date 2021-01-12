@@ -344,7 +344,8 @@ label {
     border-radius: 10px;
 }
 
-.btn-primary {
+
+/* .btn-primary {
     background-color: black;
     font-family: 'Roboto', sans-serif;
     font-size: 1.6em;
@@ -354,7 +355,7 @@ label {
 .btn-primary:hover {
     background-color: coral;
     cursor: url("https://1.bp.blogspot.com/-NmbnDADABUE/XSfhUk_X2yI/AAAAAAAAFFw/5Tp7zt_8erg2AJ-aQ1VhYdH_l4nTReY7wCLcBGAs/s1600/cursor.png"), default;
-}
+} */
 
 
 /* PAGE INSCRITPION */
