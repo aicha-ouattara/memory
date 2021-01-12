@@ -1,24 +1,22 @@
 <?php
-require_once 'wof.php';
+require_once 'Wof.php';
 require_once 'class/user.php';
+
 session_start(); //Session connexion
+
+//$card = new Card;
+//$wof = new Wof;
+//var_dump($wof);
+//$user = new User;
 
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
 }
 
-// $bdd =new PDO("mysql:host=localhost;dbname=memory","root","root");
-
-$bdd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-
-$req = $bdd->prepare("SELECT login, time, score, grille, datetime as date  FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = utilisateurs.id limit 3");
-$req->execute();
-
 $id = $user->getId();
+
+// RECUP AVATAR
 $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-
-// RECUP AVATAR 
-
 $data = $db->prepare("SELECT avatar FROM utilisateurs WHERE id = $id");
 $data->execute(array($id));
 $result = $data->fetch(PDO::FETCH_ASSOC);
@@ -86,8 +84,11 @@ foreach ($result as $value) {
                 </table>
             </div>
             <?php
-            $i = 0;
+            $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
+            $req= $db->prepare("SELECT time as temps, score as nb_coup, grille as pairs , datetime as date  FROM games WHERE id_utilisateur = ? ORDER BY games.score asc limit 3");
+            $req->execute([$id]);
 
+            $i = 0;
             echo "<div class=\"div_data\" ><table class=\"table_data\">";
             while ($result = $req->fetch(PDO::FETCH_ASSOC)) {
                 if ($i == 0) {
@@ -109,10 +110,14 @@ foreach ($result as $value) {
         </article>
 
 
-        <h3 class="best-user-score"> Ta progression</h3>
+        <h3 class="best-user-score"> Ta progression par temps</h3>
 
         <article class="table_class">
             <?php
+            $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
+            $req= $db->prepare("SELECT time as temps, score as nb_coup, grille as pairs , datetime as date  FROM games WHERE id_utilisateur = ? ORDER BY games.time asc limit 3");
+            $req->execute([$id]);
+
             $i = 0;
 
             echo "<div class=\"div_data\" ><table class=\"table_data\">";
@@ -132,6 +137,7 @@ foreach ($result as $value) {
 
             echo "</div></table>";
             ?>
+
 
         </article>
 
@@ -142,6 +148,7 @@ foreach ($result as $value) {
             </a>
             <a href="#begin"><img src="img/arrowred.png" class="arrowred"></a>
         </div>
+
 
     </main>
     <footer>
