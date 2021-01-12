@@ -5,14 +5,15 @@
 }
 
 .main_play h4 {
-    color: red;
+    color: rgb(255, 255, 255);
     font-family: 'Roboto', sans-serif;
     font-size: 1em;
     margin-bottom: 3%;
+    text-align: center;
 }
 
 .main_play h4 a {
-    color: rgb(70, 190, 59);
+    color: rgb(255, 27, 27);
 }
 
 .btn:not(:disabled):not(.disabled) {
@@ -160,7 +161,7 @@
     margin-top: 20px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     text-align: center;
     align-items: center;
     margin-bottom: 2%;
@@ -169,13 +170,15 @@
 .btn_result button {
     margin-top: 10px;
     width: 100%;
-    background-color: coral;
+    height: 50px;
+    background-color: rgb(112, 212, 103);
     border: coral;
     font-family: 'Roboto', sans-serif;
+    margin-left: 30%;
 }
 
 .btn_result button:hover {
-    background-color: rgb(250, 90, 32)
+    background-color: rgb(70, 128, 64);
 }
 
 .btn_result2 button {
@@ -198,6 +201,7 @@
 .result {
     color: white;
     font-family: 'Roboto', sans-serif;
+    text-align: center;
 }
 
 .result h2 {
@@ -206,7 +210,7 @@
 
 .button_memory2 {
     margin-top: 10px;
-    width: 20%;
+    width: 100%;
     height: 80%;
     padding: 1%;
     background-color: coral;
@@ -217,6 +221,20 @@
     margin-right: auto;
 }
 
-.button_memory2:hover {
+.btn_menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.btn_menu button {
+    width: 100%;
+    height: 50px;
+    background-color: coral;
+    border: coral;
+    font-family: 'Roboto', sans-serif;
+}
+
+.btn_menu button:hover {
     background-color: rgb(250, 90, 32)
 }

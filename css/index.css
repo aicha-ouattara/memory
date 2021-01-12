@@ -428,12 +428,15 @@ label {
 
 .info {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
     font-family: 'Luckiest Guy', cursive;
+    align-items: center;
     font-size: 50px;
     color: white;
 }
+
+.info a {}
 
 .title_hall,
 .best-user-score {
@@ -470,7 +473,7 @@ label {
 
 .avatar_profil {
     width: 12%;
-    margin-left: 16%;
+    /* margin-left: 16%; */
     border: 3px solid white;
     padding: 1%;
     background-color: rgba(0, 0, 0, 0.664);
@@ -482,18 +485,20 @@ label {
     align-items: center;
 }
 
-.info_user a {
-    margin-left: 16%;
-    margin-top: 1%;
+.info a {
     font-family: 'Roboto', cursive;
     color: rgb(233, 36, 36);
     text-decoration: none;
-    font-size: 1.2em;
+    font-size: 0.4em;
 }
 
-.info_user a:hover {
+.info a:hover {
     text-decoration: underline;
     color: green;
+}
+
+.info h2 {
+    color: rgb(245, 56, 74);
 }
 
 

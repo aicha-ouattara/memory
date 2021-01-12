@@ -76,7 +76,7 @@ if (isset($_POST['card'])) {
 	if ($finished && ($memory->getLevel() == 12 || $memory->getMode() == 'one')) {
 		// Si utilisateur connecté
 		if (isset($user)) {
-			Wof::insert_wof($memory->getTime(), $memory->getLevel(), $memory->getDate()->format('Y-m-d'), $memory->getTurn(), $user->getId());
+			Wof::insert_wof($memory->getTime(), $memory->getLevel(), $memory->getDate()->format('Y-m-d h:i:s'), $memory->getTurn(), $user->getId());
 		}
 		// On ajoute la partie à la base
 
@@ -157,17 +157,20 @@ if (isset($_POST['card'])) {
 							<?php if (isset($user)) : ?>
 								<div><button class='btn btn-primary button_memory' name='wof' type='submit' value='1'>Voir ma progression</button></div>
 							<?php endif; ?>
-							<div><button class='btn btn-primary button_memory' name='other' type='submit' value='1'>Autre niveau</button></div>
+							<!-- <div><button class='btn btn-primary button_memory' name='other' type='submit' value='1'>Autre niveau</button></div> -->
 						</div>
 					</div>
 				<?php endif; ?>
 
+				<div class="btn_menu">
+
 				<?php if ($memory->getMode() == 'chelem') : ?>
-					<div class="btn_result2"><button class='btn btn-primary' name='next' type='submit' value='1'>Niveau suivant</button></div>
+					<div><button class='btn btn-primary ' name='next' type='submit' value='1'>Niveau suivant</button></div>
 				<?php endif; ?>
 
-				<div><button class='btn btn-primary button_memory2' name='restart' type='submit' value='1'>Rejouer</button></div>
-				<div><button class='btn btn-primary button_memory2' name='menu' type='submit' value='1'>Menu principal</button></div>
+				<div><button class='btn btn-primary ' name='restart' type='submit' value='1'>Rejouer</button></div>
+				<div><button class='btn btn-primary ' name='menu' type='submit' value='1'>Menu principal</button></div>
+				</div>
 			</div>
 
 

@@ -4,8 +4,14 @@ require_once 'class/user.php';
 
 session_start(); //Session connexion
 
+//$card = new Card;
+//$wof = new Wof;
+//var_dump($wof);
+//$user = new User;
+
+
 if (isset($_SESSION['user'])) {
-    $user = $_SESSION['user'];
+	$user = $_SESSION['user'];
 }
 
 $id = $user->getId();
@@ -17,7 +23,7 @@ $data->execute(array($id));
 $result = $data->fetch(PDO::FETCH_ASSOC);
 
 foreach ($result as $value) {
-    $avatar = "<img class=\"avatar_profil\" src=\"img/$value.png\">";
+	$avatar = "<img class=\"avatar_profil\" src=\"img/$value.png\">";
 }
 
 function print_users_progress_score($tab)
@@ -55,49 +61,54 @@ function print_users_progress($tab2)
 	echo "</div></table>";
 }
 
+
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="css/index.css">
-    <title>profil utilisateur</title>
+	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/wof.css">
+	<title>profil utilisateur</title>
 </head>
 
 <body>
-    <header>
-        <?php include("includes/header.php"); ?>
-    </header>
-    <main>
+	<header>
+		<?php include("includes/header.php"); ?>
+	</header>
+	<main>
 
-        <article class="title_hall">
-            <h1>Profil</h1>
-        </article>
+		<article class="title_hall">
+			<h1>Profil</h1>
+		</article>
 
 
-        <article class="info">
-            <h2><?php echo $user->getLogin(); ?> ! </h2>
-            <h2>Ton Classement</h2>
-        </article>
+		<article class="info">
+			
+			<h2><?php echo $user->getLogin(); ?> ! </h2>
+			<?php echo $avatar ; ?>
+			<a href="profil_update.php">Modifie ton profil</a>
+	
 
-        <?php echo $avatar . "<br>"; ?>
+		</article>
 
-        <div class="info_user">
-            <a href="profil_update.php">Modifie ton profil</a>
-        </div>
 
-        <article class="title_hall">
-            <h1>Check ta progression dans l'univers des petits monstres</h1>
-        </article>
+
+
+
+		<article class="title_hall">
+			<h1>Check ta progression dans l'univers des petits monstres</h1>
+		</article>
 
 
 		<form action="profil-utilisateur.php" method="post">
-			<div class="form-group col-md-4">
+			<div class="form_level form-group col-md-4">
 				<label for="nb_paires">Choisir le niveau</label>
 				<select name="nb_paires" class="form-control">
 					<option selected>3</option>
@@ -112,44 +123,59 @@ function print_users_progress($tab2)
 					<option>12</option>
 				</select>
 			</div>
-			<button type="submit" class="btn btn-primary">Sélectionner</button>
+
+			<div class="btn_level">
+				<button type="submit" class="btn_level btn btn-primary">Sélectionner</button>
+			</div>
 		</form>
 
-		<?php
+		<section class="container_table">
 
-		if (isset($_POST['nb_paires'])) {
-			echo "<div class=\"div_data\" ><table class=\"table_data\">";
-			$tab = Wof::users_progress_nb_paires($id, $_POST['nb_paires']);
-			//var_dump($tab);
-			if ($tab) {
-				echo "<h3 class='best-user-score'> Tes meilleures scores</h3><article class='table_class'>";
-				print_users_progress_score($tab);
+			<?php
+
+			if (isset($_POST['nb_paires'])) {
+				echo "<div class=\"div_data\" ><table class=\"table_data\">";
+				$tab = Wof::users_progress_nb_paires($id, $_POST['nb_paires']);
+				//var_dump($tab);
+				if ($tab) {
+					echo "<h3 class='best-user-score'> Ta progression</h3>";
+					print_users_progress_score($tab);
+				}
+			} else {
+				echo "<div class=\"div_data\" ><table class=\"table_data\">";
+				$tab = Wof::users_progress_nb_paires($id, 3);
+				//var_dump($tab);
+				if ($tab) {
+					echo "<h3 class='best-user-score'> Tes meilleures scores</h3>";
+					print_users_progress_score($tab);
+				}
 			}
-		}else {
-			echo "<div class=\"div_data\" ><table class=\"table_data\">";
-			$tab = Wof::users_progress_nb_paires($id, 3);
-			//var_dump($tab);
-			if ($tab) {
-				echo "<h3 class='best-user-score'> Tes meilleures scores</h3><article class='table_class'>";
-				print_users_progress_score($tab);
-			}
-		}
 
-            echo "</div></table>";
-            ?>
+			echo "</div></table>";
+			?>
 
-        <div class="play">
-            <a href="memory.php">
-                <br>
-                <h4 class="title_play">A toi de jouer ! </h4>
-            </a>
-            <a href="#begin"><img src="img/arrowred.png" class="arrowred"></a>
-        </div>
 
-    </main>
-    <footer>
-        <?php include("includes/footer.php"); ?>
-    </footer>
+
+
+
+
+		</section>
+
+
+
+		<div class="play">
+			<a href="level_choice.php">
+				<br>
+				<h4 class="title_play">A toi de jouer ! </h4>
+			</a>
+			<a href="#begin"><img src="img/arrowred.png" class="arrowred"></a>
+		</div>
+
+
+	</main>
+	<footer>
+		<?php include("includes/footer.php"); ?>
+	</footer>
 </body>
 
 </html>

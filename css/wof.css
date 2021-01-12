@@ -1,0 +1,70 @@
+.main_wof {
+    height: 100vh;
+}
+
+.form_level {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 1%;
+}
+
+.btn_level {
+    text-align: center;
+    margin-bottom: 1%;
+}
+
+.btn_level button {
+    background-color: white;
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    border-color: white;
+    width: 10%;
+}
+
+.btn_level button:hover {
+    background-color: coral;
+    border-color: coral;
+    cursor: url("https://1.bp.blogspot.com/-NmbnDADABUE/XSfhUk_X2yI/AAAAAAAAFFw/5Tp7zt_8erg2AJ-aQ1VhYdH_l4nTReY7wCLcBGAs/s1600/cursor.png"), default;
+}
+
+.container_table {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: 3px solid white;
+    width: 85%;
+    margin-left: 5%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+    background-color: rgba(0, 0, 0, 0.411);
+    color: white;
+    padding: 1%;
+}
+
+.container_table table {
+    table-layout: fixed;
+}
+
+.container_table td {
+    border-bottom: 1px solid white;
+    text-align: center;
+}
+
+.container_table tr {
+    text-align: center;
+}
+
+.container_table th {
+    color: rgb(245, 56, 74);
+    font-size: 1.2em;
+    border-bottom: 2px double rgb(245, 56, 74);
+}
+
+.div_data {
+    width: 100%;
+}
+
+.table_data {
+    width: 100%;
+}
