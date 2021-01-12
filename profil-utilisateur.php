@@ -9,6 +9,7 @@ session_start(); //Session connexion
 //var_dump($wof);
 //$user = new User;
 
+
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
 }
@@ -24,6 +25,43 @@ $result = $data->fetch(PDO::FETCH_ASSOC);
 foreach ($result as $value) {
     $avatar = "<img class=\"avatar_profil\" src=\"img/$value.png\">";
 }
+
+function print_users_progress_score($tab)
+{
+	foreach ($tab[0] as $key => $value) {
+		echo "<th class=\"key\">$key</th>";
+	}
+
+	echo "<tr>";
+	foreach ($tab as $key => $line) {
+		foreach ($line as $print) {
+			echo "<td>" . $print . "</td>";
+		}
+		//echo "<td>" . $value . "</td>";
+		echo "</tr>";
+	}
+
+	echo "</div></table>";
+}
+
+function print_users_progress($tab2)
+{
+	foreach ($tab2[0] as $key => $value) {
+		echo "<th class=\"key\">$key</th>";
+	}
+
+	echo "<tr>";
+	var_dump($tab2);
+	foreach ($tab2 as $key => $line) {
+		foreach ($line as $print) {
+			echo "<td>" . $print . "</td>";
+		}
+		echo "</tr>";
+	}
+	echo "</div></table>";
+}
+
+
 
 ?>
 
@@ -65,81 +103,55 @@ foreach ($result as $value) {
             <h1>Check ta progression dans l'univers des petits monstres</h1>
         </article>
 
-        <h3 class="best-user-score"> Tes meilleures scores</h3>
-        <article class="table_class">
 
-            <div>
-                <table class="table_classement">
-                    <tr>
-                        <th>Classement</th>
-                    </tr>
+		<form action="profil-utilisateur.php" method="post">
+			<div class="form-group col-md-4">
+				<label for="nb_paires">Choisir le niveau</label>
+				<select name="nb_paires" class="form-control">
+					<option selected>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+					<option>10</option>
+					<option>11</option>
+					<option>12</option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-primary">Sélectionner</button>
+		</form>
 
-                    <?php
-                    for ($i = 1; $i <= 3; $i++) {
-                        echo "<tr>";
-                        echo "<td>" . $i . "<td>";
-                        echo "</tr>";
-                    }
-                    ?>
-                </table>
-            </div>
-            <?php
-            $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-            $req= $db->prepare("SELECT time as temps, score as nb_coup, grille as pairs , datetime as date  FROM games WHERE id_utilisateur = ? ORDER BY games.score asc limit 3");
-            $req->execute([$id]);
+		<?php
 
-            $i = 0;
-            echo "<div class=\"div_data\" ><table class=\"table_data\">";
-            while ($result = $req->fetch(PDO::FETCH_ASSOC)) {
-                if ($i == 0) {
-                    foreach ($result as $key => $value) {
-                        echo "<th class=\"key\">$key</th>";
-                    }
-                    $i++;
-                }
-                echo "<tr>";
-                foreach ($result as $key => $value) {
-                    echo "<td>" . $value . "</td>";
-                }
-                echo "</tr>";
-            }
-
-            echo "</div></table>";
-            ?>
-
-        </article>
-
-
-        <h3 class="best-user-score"> Ta progression par temps</h3>
-
-        <article class="table_class">
-            <?php
-            $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-            $req= $db->prepare("SELECT time as temps, score as nb_coup, grille as pairs , datetime as date  FROM games WHERE id_utilisateur = ? ORDER BY games.time asc limit 3");
-            $req->execute([$id]);
-
-            $i = 0;
-
-            echo "<div class=\"div_data\" ><table class=\"table_data\">";
-            while ($result = $req->fetch(PDO::FETCH_ASSOC)) {
-                if ($i == 0) {
-                    foreach ($result as $key => $value) {
-                        echo "<th class=\"key\">$key</th>";
-                    }
-                    $i++;
-                }
-                echo "<tr>";
-                foreach ($result as $key => $value) {
-                    echo "<td>" . $value . "</td>";
-                }
-                echo "</tr>";
-            }
+		if (isset($_POST['nb_paires'])) {
+			echo "<div class=\"div_data\" ><table class=\"table_data\">";
+			$tab = Wof::users_progress_nb_paires($id, $_POST['nb_paires']);
+			//var_dump($tab);
+			if ($tab) {
+				echo "<h3 class='best-user-score'> Tes meilleures scores</h3><article class='table_class'>";
+				print_users_progress_score($tab);
+			}
+		}else {
+			echo "<div class=\"div_data\" ><table class=\"table_data\">";
+			$tab = Wof::users_progress_nb_paires($id, 3);
+			//var_dump($tab);
+			if ($tab) {
+				echo "<h3 class='best-user-score'> Tes meilleures scores</h3><article class='table_class'>";
+				print_users_progress_score($tab);
+			}
+		}
 
             echo "</div></table>";
             ?>
 
 
+			?>
+
         </article>
+
+
 
         <div class="play">
             <a href="memory.php">

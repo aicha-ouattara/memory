@@ -31,22 +31,49 @@ class Wof
     //3 derniers meilleurs scores réalisés
     public static function users_progress_score($id)  //$grid ou $id ?
     {
+		$ret = [];
         $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-        $req= $db->prepare("SELECT time as temps, score, grille as pairs , datetime as date  FROM games WHERE id_utilisateur = ? ORDER BY games.score desc limit 3");
+        $req= $db->prepare("SELECT time as temps, score, grille as pairs , datetime as date  FROM games WHERE id_utilisateur = ? ORDER BY games.score LIMIT 3");
         $req->execute([$id]);
-        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+        //$resultat = $req->fetch(PDO::FETCH_ASSOC);
+		while ($resultat = $req->fetch(PDO::FETCH_ASSOC)){
+			//var_dump($resultat);
+			$ret[] = $resultat;
+		}
         $db = NULL;
-        return $resultat;
+        return $ret;
     }
     //Les 3 dernieres parties qui ont été jouer par l'user par temps
     public static function users_progress($id)
     {
+		$ret = [];
         $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
         $req = $db->prepare("SELECT time as temps, score, grille as pairs, datetime as date FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = ? ORDER BY games.time desc LIMIT 3");
-        $req->execute(array($id));
-        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
-        $db = NULL;
-        return $resultat;
+        $req->execute([$id]);
+        //$resultat = $req->fetch(PDO::FETCH_ASSOC);
+
+		while ($resultat = $req->fetch(PDO::FETCH_ASSOC)){
+			//var_dump($resultat);
+			$ret[] = $resultat;
+		}
+		$db = NULL;
+        return $ret;
+    }
+
+	public static function users_progress_nb_paires($id, $nb_paires)
+    {
+		$ret = [];
+        $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
+        $req = $db->prepare("SELECT time as temps, score, grille as niveau, datetime as date FROM games WHERE id_utilisateur = ? AND grille = ? ORDER BY games.time desc LIMIT 3");
+        $req->execute([$id, $nb_paires]);
+        //$resultat = $req->fetch(PDO::FETCH_ASSOC);
+
+		while ($resultat = $req->fetch(PDO::FETCH_ASSOC)){
+			//var_dump($resultat);
+			$ret[] = $resultat;
+		}
+		$db = NULL;
+        return $ret;
     }
 
 
@@ -54,7 +81,7 @@ class Wof
     public function top_10_time($grid)
     {
         $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-        $req = $db->prepare("SELECT avatar, login, time as temps, score, grille, datetime as date  FROM games inner join utilisateurs on games.id_utilisateur =  utilisateurs.id
+        $req = $db->prepare("SELECT avatar, login, time as temps, score as coups, grille as niveau, datetime as date  FROM games inner join utilisateurs on games.id_utilisateur =  utilisateurs.id
         WHERE grille = ? ORDER BY games.time ASC LIMIT 10 ");
         $req->execute([$grid]);
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -63,10 +90,10 @@ class Wof
     }
 
     //dix meilleurs parties par grille:niveau classé par score
-    public function top_10_score($grid)
+    public static function top_10_score($grid)
     {
         $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-        $req = $db->prepare("SELECT avatar, login, time as temps, score, grille, datetime as date FROM games inner join utilisateurs on games.id_utilisateur =  utilisateurs.id
+        $req = $db->prepare("SELECT avatar, login, time as temps, score as coups , grille as niveau, datetime as date FROM games inner join utilisateurs on games.id_utilisateur =  utilisateurs.id
         WHERE grille = ? ORDER BY games.score ASC LIMIT 10 ");
         $req->execute([$grid]);
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -88,7 +115,7 @@ class Wof
 
 
 
-$wof = new Wof();
+//$wof = new Wof();
 //echo "<pre>";
 //var_dump($wof->users_profil_details());
 //echo "</pre>";

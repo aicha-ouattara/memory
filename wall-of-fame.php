@@ -1,11 +1,30 @@
 <?php
 require_once 'wof.php';
+require_once 'class/user.php';
 session_start(); //Session connexion
 
 $bdd =new PDO("mysql:host=localhost;dbname=memory","root","");
 
 $req = $bdd->prepare( "SELECT avatar, login, time, score, grille, datetime as date FROM games INNER JOIN utilisateurs WHERE games.id_utilisateur = utilisateurs.id" );
 $req->execute();
+
+function print_users_progress_score($tab)
+{
+	foreach ($tab[0] as $key => $value) {
+		echo "<th class=\"key\">$key</th>";
+	}
+
+	echo "<tr>";
+	foreach ($tab as $key => $line) {
+		foreach ($line as $print) {
+			echo "<td>" . $print . "</td>";
+		}
+		//echo "<td>" . $value . "</td>";
+		echo "</tr>";
+	}
+
+	echo "</div></table>";
+}
 
 ?>
 
@@ -38,44 +57,49 @@ $req->execute();
 <article class="best-user-score">
    <h2><span class="top-10-1">Top 10</span> des meilleurs petit monstres !</h2>
 </article>
-    <article class="table_class">
-        <div>
-            <table class="table_classement">
-                <tr>
-                    <th>Classement</th>
-                </tr>
-                <?php
-                for ($i = 1; $i <= 10; $i++) {
-                    echo "<tr>";
-                    echo "<td class='td'>" . $i . "<td>";
-                    echo "</tr>";
-                }
-                ?>
-            </table>
-        </div>
 
-        <?php
-        $i = 0;
+<form action="wall-of-fame.php" method="post">
+	<div class="form-group col-md-4">
+		<label for="nb_paires">Choisir le niveau</label>
+		<select name="nb_paires" class="form-control">
+			<option selected>3</option>
+			<option>4</option>
+			<option>5</option>
+			<option>6</option>
+			<option>7</option>
+			<option>8</option>
+			<option>9</option>
+			<option>10</option>
+			<option>11</option>
+			<option>12</option>
+		</select>
+	</div>
+	<button type="submit" class="btn btn-primary">Sélectionner</button>
+</form>
 
-        echo "<div class=\"div_data\" ><table class=\"table_data\">";
-        while ($result = $req->fetch(PDO::FETCH_ASSOC)) {
-            if ($i == 0) {
-                foreach ($result as $key => $value) {
-                    echo "<th class=\"key\">$key</th>";
-                }
-                $i++;
-            }
-            echo "<tr>";
-            foreach ($result as $key => $value) {
-                echo "<td>" . $value . "</td>";
-            }
-            echo "</tr>";
-        }
+<?php
 
-        echo "</div></table>";
-        ?>
+if (isset($_POST['nb_paires'])) {
+	echo "<div class=\"div_data\" ><table class=\"table_data\">";
+	$tab = Wof::top_10_score($_POST['nb_paires']);
+	//var_dump($tab);
+	if ($tab) {
+		//echo "<h3 class='best-user-score'> Tes meilleures scores</h3><article class='table_class'>";
+		print_users_progress_score($tab);
+	}
+}else {
+	echo "<div class=\"div_data\" ><table class=\"table_data\">";
+	$tab = Wof::top_10_score(3);
+	//var_dump($tab);
+	if ($tab) {
+		//echo "<h3 class='best-user-score'> Tes meilleures scores</h3><article class='table_class'>";
+		print_users_progress_score($tab);
+	}
+}
 
-    </article>
+
+
+	?>
 
     <div class="play">
         <a href="memory.php">
@@ -92,4 +116,3 @@ $req->execute();
 </footer>
 </body>
 </html>
-
