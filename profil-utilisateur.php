@@ -7,6 +7,10 @@ session_start(); //Session connexion
 //var_dump($wof);
 //$user = new User;
 
+echo "<pre>";
+var_dump($_POST);
+echo "</pre>";
+
 if (isset($_SESSION['user'])) {
     $user = $_SESSION['user'];
 }
@@ -58,6 +62,8 @@ function print_users_progress($tab2)
 	echo "</div></table>";
 }
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -99,31 +105,45 @@ function print_users_progress($tab2)
         </article>
 
 
+		<form action="profil-utilisateur.php" method="post">
+			<div class="form-group col-md-4">
+				<label for="nb_paires">Choisir le niveau</label>
+				<select name="nb_paires" class="form-control">
+					<option selected>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+					<option>10</option>
+					<option>11</option>
+					<option>12</option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-primary">Sélectionner</button>
+		</form>
 
-            <!-- <div>
-                <table class="table_classement">
-                    <tr>
-                        <th>Classement</th>
-                    </tr>
+		<?php
 
-
-                    // for ($i = 1; $i <= 3; $i++) {
-                    //     echo "<tr>";
-                    //     echo "<td>" . $i . "<td>";
-                    //     echo "</tr>";
-                    //}
-
-                </table>
-            </div> -->
-
-			<?php
+		if (isset($_POST['nb_paires'])) {
 			echo "<div class=\"div_data\" ><table class=\"table_data\">";
-			$tab = Wof::users_progress_score($id);
+			$tab = Wof::users_progress_nb_paires($id, $_POST['nb_paires']);
 			//var_dump($tab);
 			if ($tab) {
 				echo "<h3 class='best-user-score'> Tes meilleures scores</h3><article class='table_class'>";
 				print_users_progress_score($tab);
 			}
+		}else {
+			echo "<div class=\"div_data\" ><table class=\"table_data\">";
+			$tab = Wof::users_progress_nb_paires($id, 3);
+			//var_dump($tab);
+			if ($tab) {
+				echo "<h3 class='best-user-score'> Tes meilleures scores</h3><article class='table_class'>";
+				print_users_progress_score($tab);
+			}
+		}
+
 
 
 			?>
@@ -131,46 +151,6 @@ function print_users_progress($tab2)
         </article>
 
 
-
-
-			<?php
-			echo "<div class=\"div_data\" ><table class=\"table_data\">";
-			$tab2 = Wof::users_progress($id);
-			var_dump($tab2);
-			if ($tab2) {
-				echo "<h3 class='best-user-score'> Ta progression</h3><article class='table_class'>";
-				print_users_progress($tab2);
-			}
-
-
-
-
-		// foreach ($tab2 as $key => $value) {
-		//
-		// 	if ($key == 0) {
-		// 		foreach ($value as $col) {
-		// 			echo "<th class=\"key\">$col</th>";
-		// 		}
-		// 	}else {
-		// 		foreach ($value as $col) {
-		// 			echo "<td>" . $col . "</td>";
-		// 		}
-		// 	}
-		// 	echo "</tr>";
-		// }
-
-
-
-       // echo "<tr>";
-       // foreach ($tab2 as $value) {
-       //     echo "<td>" . $value . "</td>";
-       // }
-
-
-       //echo "</tr>";
-       //echo "</div></table>";?>
-
-        </article>
 
         <div class="play">
             <a href="memory.php">

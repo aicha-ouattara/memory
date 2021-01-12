@@ -60,6 +60,22 @@ class Wof
         return $ret;
     }
 
+	public static function users_progress_nb_paires($id, $nb_paires)
+    {
+		$ret = [];
+        $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
+        $req = $db->prepare("SELECT time as temps, score, grille as pairs, datetime as date FROM games WHERE id_utilisateur = ? AND grille = ? ORDER BY games.time desc LIMIT 3");
+        $req->execute([$id, $nb_paires]);
+        //$resultat = $req->fetch(PDO::FETCH_ASSOC);
+
+		while ($resultat = $req->fetch(PDO::FETCH_ASSOC)){
+			//var_dump($resultat);
+			$ret[] = $resultat;
+		}
+		$db = NULL;
+        return $ret;
+    }
+
 
     //dix meilleurs parties par grille:niveau classé par temps
     public function top_10_time($grid)
