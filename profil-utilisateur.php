@@ -23,6 +23,36 @@ foreach ($result as $value) {
     $avatar = "<img class=\"avatar_profil\" src=\"img/$value.png\">";
 }
 
+function print_users_progress_score($tab)
+{
+	foreach ($tab as $key => $value) {
+		echo "<th class=\"key\">$key</th>";
+	}
+
+	echo "<tr>";
+	foreach ($tab as  $value) {
+		echo "<td>" . $value . "</td>";
+	}
+	echo "</tr>";
+	echo "</div></table>";
+}
+
+function print_users_progress($tab2)
+{
+	foreach ($tab2[0] as $key => $value) {
+		echo "<th class=\"key\">$key</th>";
+	}
+
+	echo "<tr>";
+	foreach ($tab2 as $key => $line) {
+		foreach ($line as $print) {
+			echo "<td>" . $print . "</td>";
+		}
+		echo "</tr>";
+	}
+	echo "</div></table>";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -63,63 +93,65 @@ foreach ($result as $value) {
             <h1>Check ta progression dans l'univers des petits monstres</h1>
         </article>
 
-        <h3 class="best-user-score"> Tes meilleures scores</h3>
-        <article class="table_class">
 
-            <div>
+
+            <!-- <div>
                 <table class="table_classement">
                     <tr>
                         <th>Classement</th>
                     </tr>
 
                     <?php
-                    for ($i = 1; $i <= 3; $i++) {
-                        echo "<tr>";
-                        echo "<td>" . $i . "<td>";
-                        echo "</tr>";
-                    }
+                    // for ($i = 1; $i <= 3; $i++) {
+                    //     echo "<tr>";
+                    //     echo "<td>" . $i . "<td>";
+                    //     echo "</tr>";
+                    //}
                     ?>
                 </table>
-            </div>
-            <?php
-            echo "<div class=\"div_data\" ><table class=\"table_data\">";
-            $tab = Wof::users_progress_score($id);
+            </div> -->
 
-            foreach ($tab as $key => $value) {
-            	echo "<th class=\"key\">$key</th>";
-            }
+			<?php
+			echo "<div class=\"div_data\" ><table class=\"table_data\">";
+			$tab = Wof::users_progress_score($id);
+			if ($tab) {
+				echo "<h3 class='best-user-score'> Tes meilleures scores</h3><article class='table_class'>";
+				print_users_progress_score($tab);
+			}
 
-                echo "<tr>";
-                foreach ($tab as  $value) {
-                    echo "<td>" . $value . "</td>";
-                }
-                echo "</tr>";
-            echo "</div></table>";
-            ?>
+
+			?>
 
         </article>
 
 
-        <h3 class="best-user-score"> Ta progression</h3>
 
-        <article class="table_class">
-            <?php
-       echo "<div class=\"div_data\" ><table class=\"table_data\">";
-       $tab2 = Wof::users_progress($id);
 
-		foreach ($tab2 as $key => $value) {
+			<?php
+			echo "<div class=\"div_data\" ><table class=\"table_data\">";
+			$tab2 = Wof::users_progress($id);
 
-			if ($key == 0) {
-				foreach ($value as $col) {
-					echo "<th class=\"key\">$col</th>";
-				}
-			}else {
-				foreach ($value as $col) {
-					echo "<td>" . $col . "</td>";
-				}
+			if ($tab2) {
+				echo "<h3 class='best-user-score'> Ta progression</h3><article class='table_class'>";
+				print_users_progress($tab2);
 			}
-			echo "</tr>";
-		}
+
+
+
+
+		// foreach ($tab2 as $key => $value) {
+		//
+		// 	if ($key == 0) {
+		// 		foreach ($value as $col) {
+		// 			echo "<th class=\"key\">$col</th>";
+		// 		}
+		// 	}else {
+		// 		foreach ($value as $col) {
+		// 			echo "<td>" . $col . "</td>";
+		// 		}
+		// 	}
+		// 	echo "</tr>";
+		// }
 
 
 
@@ -127,8 +159,10 @@ foreach ($result as $value) {
        // foreach ($tab2 as $value) {
        //     echo "<td>" . $value . "</td>";
        // }
-       echo "</tr>";
-       echo "</div></table>";?>
+
+
+       //echo "</tr>";
+       //echo "</div></table>";?>
 
         </article>
 
