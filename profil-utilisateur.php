@@ -4,6 +4,7 @@ require_once 'class/user.php';
 
 session_start(); //Session connexion
 
+
 //$card = new Card;
 //$wof = new Wof;
 //var_dump($wof);
@@ -80,6 +81,7 @@ function print_users_progress($tab2)
 
 <body>
 	<header>
+	<div id="begin"></div>
 		<?php include("includes/header.php"); ?>
 	</header>
 	<main>
@@ -166,7 +168,7 @@ function print_users_progress($tab2)
 		<div class="play">
 			<a href="level_choice.php">
 				<br>
-				<h4 class="title_play">A toi de jouer ! </h4>
+				<h4 class="title_play">Jouer ! </h4>
 			</a>
 			<a href="#begin"><img src="img/arrowred.png" class="arrowred"></a>
 		</div>

@@ -18,6 +18,8 @@ class user
     public function register($login, $password, $password_check, $avatar) //fonction pour l'inscription
     {
 
+   
+
         //verification empty
         if (empty($login) or empty($password) or empty($password_check) or empty($avatar)) {
             $errors[] = "Tous les champs doivent être remplis.";

@@ -14,7 +14,7 @@ if (isset($_SESSION['user'])) {
 
 $bd = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
 
-$req = $bd->prepare("SELECT utilisateurs.login as Pseudo,  games.datetime as Date, games.grille as Grille, DATE_FORMAT(time, '%i:%s') AS Chrono, games.score as Score  FROM games inner join utilisateurs on games.id_utilisateur =  utilisateurs.id ORDER BY games.score DESC LIMIT 10 ");
+$req = $bd->prepare("SELECT utilisateurs.login as Pseudo,  DATE_FORMAT(time, '%i:%s') AS Chrono, games.score as Coups, games.grille as Grille, DATE_FORMAT(datetime, '%d/%m/%Y %H:%i') as Date  FROM games inner join utilisateurs on games.id_utilisateur =  utilisateurs.id WHERE grille=12 ORDER BY games.time ASC LIMIT 10 ");
 $req->execute();
 
 
@@ -81,7 +81,7 @@ $req->execute();
                 </div>
                 <div class="container_title">
                     <h2>WALL OF FAME</h2>
-                    <h3>Le classement des meilleurs petit monstres !</h3>
+                    <h3>Le classement des meilleurs petit monstres<br> sur la plus grande grille !</h3>
                 </div>
             </article>
 
@@ -116,6 +116,7 @@ $req->execute();
                     }
                     echo "<tr>";
                     foreach ($result as $key => $value) {
+                        date_default_timezone_set('Europe/Paris');
                         echo "<td>" . $value . "</td>";
                     }
                     echo "</tr>";
@@ -127,7 +128,10 @@ $req->execute();
             </article>
 
             <div class="play">
-                <a href="memory.php">
+                <a href="wall-of-fame.php">
+                    <br><h4 class="title_play">Voir les classements de toute les grilles</h4>
+                </a>
+                <a href="level_choice.php">
                     <br><h4 class="title_play">A toi de jouer ! </h4>
                 </a>
                 <a href="#begin"><img src="img/arrowred.png" class="arrowred"></a>

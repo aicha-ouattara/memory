@@ -12,6 +12,7 @@ class Wof
 
     public static function insert_wof($time, $grid, $datetime, $score, $id_utilisateur)
     {
+        date_default_timezone_set('Europe/Paris');
         $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
         $req_insert = $db->prepare("INSERT INTO games ( time , grille , datetime, score, id_utilisateur) VALUES (?, ?, ?, ?, ?)") ;
         $req_insert->execute([$time, $grid, $datetime, $score, $id_utilisateur]);
@@ -64,7 +65,7 @@ class Wof
     {
 		$ret = [];
         $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-        $req = $db->prepare("SELECT time as temps, score, grille as niveau, datetime as date FROM games WHERE id_utilisateur = ? AND grille = ? ORDER BY games.time ASC LIMIT 3");
+        $req = $db->prepare("SELECT  DATE_FORMAT(datetime, '%d/%m/%d/%Y %H:%i') as date, DATE_FORMAT(time, '%i:%s') as chrono, score, grille as niveau FROM games WHERE id_utilisateur = ? AND grille = ? ORDER BY datetime DESC ");
         $req->execute([$id, $nb_paires]);
         //$resultat = $req->fetch(PDO::FETCH_ASSOC);
 
@@ -81,7 +82,7 @@ class Wof
     public function top_10_time($grid)
     {
         $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-        $req = $db->prepare("SELECT login, time as temps, score as coups, grille as niveau, datetime as date  FROM games inner join utilisateurs on games.id_utilisateur =  utilisateurs.id
+        $req = $db->prepare("SELECT login, time as temps, score as coups, grille as niveau, DATE_FORMAT(datetime, '%d/%m/%d/%Y %H:%i') as date  FROM games inner join utilisateurs on games.id_utilisateur =  utilisateurs.id
         WHERE grille = ? ORDER BY games.time ASC LIMIT 10 ");
         $req->execute([$grid]);
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -93,7 +94,7 @@ class Wof
     public static function top_10_score($grid)
     {
         $db = new PDO("mysql:host=" . MYSQL_SERVEUR . ";dbname=" . MYSQL_BASE . "", MYSQL_UTILISATEUR, MYSQL_MOTDEPASSE);
-        $req = $db->prepare("SELECT login, time as temps, score as coups , grille as niveau, datetime as date FROM games inner join utilisateurs on games.id_utilisateur =  utilisateurs.id
+        $req = $db->prepare("SELECT login, DATE_FORMAT(time, '%i:%s') as chrono, score as coups , grille as niveau, DATE_FORMAT(datetime, '%d/%m/%Y %H:%i') as date FROM games inner join utilisateurs on games.id_utilisateur =  utilisateurs.id
         WHERE grille = ? ORDER BY games.time ASC LIMIT 10 ");
         $req->execute([$grid]);
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);

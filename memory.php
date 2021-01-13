@@ -157,7 +157,9 @@ if (isset($_POST['card'])) {
 							<?php if (isset($user)) : ?>
 								<div><button class='btn btn-primary button_memory' name='wof' type='submit' value='1'>Voir ma progression</button></div>
 							<?php endif; ?>
-							<!-- <div><button class='btn btn-primary button_memory' name='other' type='submit' value='1'>Autre niveau</button></div> -->
+							<?php if($memory->getMode() == 'one'):?>
+							<div><button class='btn btn-primary button_memory' name='other' type='submit' value='1'>Autre niveau</button></div> 
+							<?php endif; ?>
 						</div>
 					</div>
 				<?php endif; ?>
