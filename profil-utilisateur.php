@@ -1,5 +1,5 @@
 <?php
-require_once 'Wof.php';
+require_once 'class/Wof.php';
 require_once 'class/user.php';
 
 session_start(); //Session connexion
@@ -73,6 +73,7 @@ function print_users_progress($tab2)
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/wof.css">
@@ -148,7 +149,7 @@ function print_users_progress($tab2)
 				$tab = Wof::users_progress_nb_paires($id, 3);
 				//var_dump($tab);
 				if ($tab) {
-					echo "<h3 class='best-user-score'> Tes meilleures scores</h3>";
+					echo "<h3 class='best-user-score'> Ta progression</h3>";
 					print_users_progress_score($tab);
 				}
 			}

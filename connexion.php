@@ -60,7 +60,7 @@ $user = new user;
                             <label for="exampleInputPassword1">Mot de passe</label>
                             <input type="password" class="form-control" name="password" placeholder="Entre ton mot de passe"><br>
                         </div>
-                        <button type="submit" name="submit" class="btn btn-primary">Se connecter</button>
+                        <button type="submit" name="submit" class="bouton btn btn-primary">Se connecter</button>
                     </form>
                 </div>
             </div>

@@ -120,7 +120,7 @@ foreach ($result as $value) {
                                 </div>
                             </div>
                         </div>
-                        <br><button type="submit" name="submit" class="btn btn-primary">Modifier mon profil</button>
+                        <br><button type="submit" name="submit" class="bouton btn btn-primary">Modifier mon profil</button>
                     </form>
 
                 </div>

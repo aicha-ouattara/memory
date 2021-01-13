@@ -111,7 +111,7 @@ $user = new user();
                                 </div>
                             </div>
                         </div>
-                        <br><button type="submit" name="submit" class="btn btn-primary">S'inscrire</button>
+                        <br><button type="submit" name="submit" class="bouton btn btn-primary">S'inscrire</button>
                     </form>
 
                 </div>
